@@ -1,0 +1,66 @@
+div.popup.popup--clients
+    div.close-form
+        div.close-form__line.close-form__line--1
+        div.close-form__line.close-form__line--2
+
+    h3 Карточка клиента
+    div.row
+        div.col-md-6
+            div.form-group
+                label.form-label(for="phone") Телефон
+                input.form-control#phone(type="text" value="X (XXX) XXX-XX-XX" disabled)
+        div.col-md-6
+            div.form-group
+                label.form-label(for="name") Имя
+                input.form-control#name(type="text" value="")
+
+    div.row
+        div.col-md-12
+            div.table-responsive
+                div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
+                    table.table
+                        thead
+                            tr
+                                th Заказы
+                                th Отменённых
+                                th Отзывы
+                        tbody
+                            tr
+                                td 10
+                                td 1
+                                td 1
+
+    div.row.text-right
+        div.col-md-12
+            div.d-flex
+                button.btn.btn-primary.ml-auto(type="submit") Добавить новый заказ
+
+    div.row.top-16
+        div.col-md-12
+            div.table-responsive
+                div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
+                    table.table
+                        thead
+                            tr
+                                th №
+                                th Дата
+                                th Время
+                                th Статус
+                        tbody
+                            tr
+                                td 342342
+                                td 25.09.2019
+                                td 15:00
+                                td Закрыт
+
+    div.row
+        div.col-md-12
+            div.form-group
+                label.form-label(for="review") Отзыв
+                textarea.form-control#review
+
+    div.row.text-right
+        div.col-md-12
+            div.d-flex
+                button.btn.btn-secondary.ml-auto(type="submit") Добавить отзыв
+

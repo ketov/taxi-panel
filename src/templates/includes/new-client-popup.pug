@@ -1,0 +1,50 @@
+div.popup.popup--new-client
+    div.close-form
+        div.close-form__line.close-form__line--1
+        div.close-form__line.close-form__line--2
+
+    h3 Карточка пользователя
+    div.row
+        div.col-md-12
+            div.form-group
+                label.form-label(for="phone") Телефон
+                input.form-control#phone(type="text" value="X (XXX) XXX-XX-XX" disabled)
+        div.col-md-12
+            div.form-group
+                label.form-label(for="password") Пароль
+                input.form-control#password(type="text" value="●●●●●●●●")
+        div.col-md-12
+            div.form-group
+                label.form-label(for="name") Имя
+                input.form-control#name(type="text" value="")
+
+        div.col-md-12
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="" checked)
+                span.custom-control-label Новые
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Опубликованные
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label В работе
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Архив
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Водители
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Клиенты
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Настройки
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="")
+                span.custom-control-label Удалять заказы
+
+    div.row.text-right
+        div.col-md-12
+                button.btn.btn-secondary.ml-auto(type="submit") Удалить
+                button.btn.btn-primary.ml-auto(type="submit") Сохранить и закрыть

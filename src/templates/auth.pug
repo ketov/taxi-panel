@@ -1,0 +1,39 @@
+doctype html
+html
+    head
+        title Вход
+        meta(name="description", content="")
+        meta(name="keywords", content="")
+        meta(charset="UTF-8") 
+        meta(name='viewport' content='width=device-width,initial-scale=1')
+        meta(content='true' name='HandheldFriendly')
+        meta(content='width' name='MobileOptimized')
+        meta(content='yes' name='apple-mobile-web-app-capable')
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap")
+        link(rel="stylesheet" type="text/css" href="assets/css/all.min.css")
+
+    body
+        div.page
+            div.page-single
+                div.container
+                    div.row
+                        div.col.col-login.mx-auto
+                            form.card
+                                div.card-body.p-6
+                                    div.card-title Вход
+                                    div.form-group
+                                        input.form-control(type="email" placeholder="Телефон")
+                                    div.form-group
+                                        input.form-control(type="password" placeholder="Пароль")
+                                    div.form-group
+                                        label.custom-control.custom-checkbox
+                                            input.custom-control-input(type="checkbox")
+                                            span.custom-control-label Запомнить
+                                    div.form-footer
+                                        button.btn.btn-primary.btn-block(type="submit") Войти 
+                                        
+
+       
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="assets/js/app.min.js")

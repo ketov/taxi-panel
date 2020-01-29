@@ -1,0 +1,63 @@
+div.popup.popup--drivers
+    div.close-form
+        div.close-form__line.close-form__line--1
+        div.close-form__line.close-form__line--2
+
+
+    h3 Карточка водителя
+    div.row
+        div.col-md-6
+            div.form-group
+                label.form-label(for="phone") Телефон
+                input.form-control#phone(type="text" value="X (XXX) XXX-XX-XX" disabled)
+        div.col-md-6
+            div.form-group
+                label.form-label(for="name") Имя
+                input.form-control#name(type="text" value="")
+    
+    div.row
+        div.col-md-6
+            div.form-group
+                label.form-label(for="mark") Марка
+                input.form-control#mark(type="text" value="")
+        div.col-md-6
+            div.form-group
+                label.form-label(for="model") Модель
+                input.form-control#model(type="text" value="")
+
+    div.row
+        div.col-md-12
+            div.table-responsive
+                div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
+                    table.table
+                        thead
+                            tr
+                                th Выполненных
+                                th В работе
+                                th Срывов
+                                th Отменённых
+                                th Отзывы
+                        tbody
+                            tr
+                                td 560
+                                td 2
+                                td 2
+                                td 0
+                                td 4
+
+    div.row.text-right
+        div.col-md-12
+            div.d-flex
+                button.btn.btn-primary.ml-auto(type="submit") Сохранить и закрыть
+
+    div.row
+        div.col-md-12
+            div.form-group
+                label.form-label(for="review") Отзыв
+                textarea.form-control#review
+
+    div.row.text-right
+        div.col-md-12
+            div.d-flex
+                button.btn.btn-secondary.ml-auto(type="submit") Добавить отзыв
+

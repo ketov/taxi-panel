@@ -1,0 +1,23 @@
+// Bootstrap
+//@import "_bootstrap.scss";
+
+// Owl-carousel
+//@import "../../bower_components/owl.carousel/dist/assets/owl.carousel.css";
+
+@import '_variables.scss';
+
+// Элементы(кнопки, формы и т. д.)
+//@import '_elements.scss';
+
+// Страницы
+//@import 'pages/projects.scss';
+
+// Библиотеки
+@import 'libs/bootstrap.scss';
+@import 'libs/animate.min.scss';
+@import 'libs/dashboard.scss';
+
+@import '_main.scss';
+
+// Блоки
+//@import 'blocks/comment.scss';

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>В работе</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta content="true" name="HandheldFriendly">
+    <meta content="width" name="MobileOptimized">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap">
+    <link rel="stylesheet" type="text/css" href="assets/css/all.min.css">
+  </head>
+  <body>
+    <div id="black-bg"></div>
+    <div class="popup popup--assign-driver">
+      <div class="close-form">
+        <div class="close-form__line close-form__line--1"></div>
+        <div class="close-form__line close-form__line--2"></div>
+      </div>
+      <h3>Назначить водителя</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="input-icon mb-3">
+              <input class="form-control" type="text" placeholder="Поиск..."><span class="input-icon-addon"><i class="fe fe-search"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex">
+            <button class="btn btn-outline-primary add-driver" type="submit"><i class="fe fe-plus mr-2"></i>Новый водитель</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <div class="dataTables_wrapper no-footer" id="DataTables_Table_0_wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>Модель</th>
+                    <th>Марка</th>
+                    <th>Гос. номер</th>
+                    <th>Выполненных</th>
+                    <th>В работе</th>
+                    <th>Срывы</th>
+                    <th>Претензии</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Фёдор</td>
+                    <td>+7 (992) 310-54-30</td>
+                    <td>Hyundai</td>
+                    <td>Solaris</td>
+                    <td>Е432КА</td>
+                    <td>272</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup popup--add-driver">
+      <div class="close-add-driver">
+        <div class="close-form__line close-form__line--1"></div>
+        <div class="close-form__line close-form__line--2"></div>
+      </div>
+      <h3>Новый водитель</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label" for="new-driver-phone">Телефон</label>
+            <input class="form-control" id="new-driver-phone" type="text" value="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label" for="new-driver-name">Имя</label>
+            <input class="form-control" id="new-driver-name" type="text" value="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label" for="new-driver-mark">Марка</label>
+            <input class="form-control" id="new-driver-mark" type="text" value="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label" for="new-driver-model">Модель</label>
+            <input class="form-control" id="new-driver-model" type="text" value="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-label" for="new-driver-number">Гос. номер</label>
+            <input class="form-control" id="new-driver-number" type="text" value="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-block" type="submit">Добавить</button>
+        </div>
+      </div>
+    </div>
+    <div class="my-3 my-md-5">
+      <div class="container">
+        <div class="row taxi-row">
+          <div class="col-md-3">
+            <div class="list-group">
+              <h3>Заказы</h3><a class="list-group-item list-group-item-action d-flex align-items-center" href="new-orders.html"><span class="icon mr-3"><i class="fe fe-bell"></i></span>Новые<span class="ml-auto badge badge-secondary">2</span></a><a class="list-group-item list-group-item-action d-flex align-items-center" href="index.html"><span class="icon mr-3"><i class="fe fe-check-circle"></i></span>Опубликованные<span class="ml-auto badge badge-secondary">1</span></a><a class="list-group-item list-group-item-action d-flex align-items-center active" href="#"><span class="icon mr-3"><i class="fe fe-refresh-cw"></i></span>В работе<span class="ml-auto badge badge-primary">12</span></a><a class="list-group-item list-group-item-action d-flex align-items-center" href="#"><span class="icon mr-3"><i class="fe fe-inbox"></i></span>Архив<span class="ml-auto badge badge-secondary">434</span></a>
+            </div>
+            <div class="list-group list-group--secondary"><a class="list-group-item list-group-item-action d-flex align-items-center" href="drivers.html"><span class="icon mr-3"><i class="fe fe-truck"></i></span>Водители</a><a class="list-group-item list-group-item-action d-flex align-items-center" href="clients.html"><span class="icon mr-3"><i class="fe fe-users"></i></span>Клиенты</a><a class="list-group-item list-group-item-action d-flex align-items-center" href="settings.html"><span class="icon mr-3"><i class="fe fe-settings"></i></span>Настройки</a></div>
+            <div class="list-group list-group--secondary"><a class="list-group-item list-group-item-action d-flex align-items-center" href="#"><span class="icon mr-3"><i class="fe fe-log-out"></i></span>Выход</a></div>
+          </div>
+          <div class="col-md-9 filters row" id="app-process">
+            <div class="nav-actions">
+              <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-plus"></i>Новый заказ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-edit-2"></i>Редактировать</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-x"></i>Закрыть</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-copy"></i>В буфер</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-trash-2"></i>Удалить</a></li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="number" placeholder="№" v-model="inputNumber">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="date" placeholder="Дата" v-model="inputDate">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="time" placeholder="Время" v-model="inputTime">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="from" placeholder="Откуда" v-model="inputFrom">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="where" placeholder="Куда" v-model="inputWhere">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="phone" placeholder="Телефон" v-model="inputPhone">
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="text" name="driver" placeholder="Водитель" v-model="inputDriver">
+            </div>
+            <button class="btn btn-primary" id="clear">Сбросить</button>
+            <div class="card card--orders">
+              <div class="table-responsive">
+                <div class="dataTables_wrapper no-footer" id="DataTables_Table_0_wrapper">
+                  <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                    <thead>
+                      <th> </th>
+                      <th>№</th>
+                      <th>Дата</th>
+                      <th>Время</th>
+                      <th>Откуда</th>
+                      <th>Куда</th>
+                      <th>Имя</th>
+                      <th>Телефон</th>
+                      <th>Цена</th>
+                      <th>%</th>
+                      <th>Тариф</th>
+                      <th>Водитель</th>
+                    </thead>
+                    <tbody>
+                      <tr class="{{item.class}}" v-for="item in array | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'">
+                        <td>
+                          <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox"><span class="custom-control-label"></span>
+                          </label>
+                        </td>
+                        <td>{{item.number}}</td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.time}}</td>
+                        <td>{{item.from}}</td>
+                        <td>{{item.where}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.percent}}</td>
+                        <td>{{item.tariff}}</td>
+                        <td>{{item.driver}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">1 — 10 из 32 записей</div>
+                  <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous">Предыдущая</a><a class="paginate_button current" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" href="#">1</a><a class="paginate_button" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#">2</a><a class="paginate_button" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#">3</a><a class="paginate_button" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#">4</a><a class="paginate_button next" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0">Следующая</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="assets/js/app.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+div.popup.popup--assign-driver
+    div.close-form
+        div.close-form__line.close-form__line--1
+        div.close-form__line.close-form__line--2
+
+    h3 Назначить водителя
+    div.row
+        div.col-md-6
+            div.form-group
+                div.input-icon.mb-3
+                    input(type="text" class="form-control" placeholder="Поиск...")
+                    span.input-icon-addon
+                        i.fe.fe-search
+        div.col-md-6
+            div.d-flex
+                button.btn.btn-outline-primary.add-driver(type="submit")
+                    i.fe.fe-plus.mr-2
+                    | Новый водитель
+
+    div.row
+        div.col-md-12
+            div.table-responsive
+                div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
+                    table.table
+                        thead
+                            tr
+                                th Имя
+                                th Телефон
+                                th Модель
+                                th Марка
+                                th Гос. номер
+                                th Выполненных
+                                th В работе
+                                th Срывы
+                                th Претензии
+                        tbody
+                            tr
+                                td Фёдор
+                                td +7 (992) 310-54-30
+                                td Hyundai
+                                td Solaris
+                                td Е432КА
+                                td 272
+                                td 0
+                                td 1
+                                td 1

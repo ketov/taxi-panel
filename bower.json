@@ -1,0 +1,11 @@
+{
+  "name": "html-blank",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.2.0",
+    "bootstrap-sass": "~3.3.7",
+    "owl.carousel": "^2.2.0",
+    "gsap": "^1.19.0"
+  },
+  "devDependencies": {}
+}

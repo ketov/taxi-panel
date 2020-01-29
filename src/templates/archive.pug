@@ -1,0 +1,165 @@
+doctype html
+html
+    head
+        title Архив
+        meta(name="description", content="")
+        meta(name="keywords", content="")
+        meta(charset="UTF-8") 
+        meta(name='viewport' content='width=device-width,initial-scale=1')
+        meta(content='true' name='HandheldFriendly')
+        meta(content='width' name='MobileOptimized')
+        meta(content='yes' name='apple-mobile-web-app-capable')
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap")
+        link(rel="stylesheet" type="text/css" href="assets/css/all.min.css")
+
+    body
+        div#black-bg
+        include includes/assign-driver
+        include includes/add-driver
+
+        div.my-3.my-md-5
+            div.container
+                div.row.taxi-row
+                    div.col-md-3
+                        div.list-group
+                            h3 Заказы
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="new-orders.html")
+                                span.icon.mr-3
+                                    i.fe.fe-bell
+                                | Новые
+                                span.ml-auto.badge.badge-secondary 2
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="index.html")
+                                span.icon.mr-3
+                                    i.fe.fe-check-circle
+                                | Опубликованные
+                                span.ml-auto.badge.badge-secondary 1
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="process.html")
+                                span.icon.mr-3
+                                    i.fe.fe-refresh-cw
+                                | В работе
+                                span.ml-auto.badge.badge-secondary 12
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center.active(href="archive.html")
+                                span.icon.mr-3
+                                    i.fe.fe-inbox
+                                | Архив
+                                span.ml-auto.badge.badge-primary 434
+
+                        div.list-group.list-group--secondary
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="drivers.html")
+                                span.icon.mr-3
+                                    i.fe.fe-truck
+                                | Водители
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="clients.html")
+                                span.icon.mr-3
+                                    i.fe.fe-users
+                                | Клиенты
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="settings.html")
+                                span.icon.mr-3
+                                    i.fe.fe-settings
+                                | Настройки
+
+                        div.list-group.list-group--secondary
+                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="#")
+                                span.icon.mr-3
+                                    i.fe.fe-log-out
+                                | Выход
+                            
+
+                    div.col-md-9.filters.row#app-archive
+                        div.nav-actions
+                            ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-plus
+                                        | Новый заказ
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-edit-2
+                                        | Редактировать
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-copy
+                                        | В буфер
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-trash-2
+                                        | Удалить
+
+                        div.form-group
+                            input.form-control(type="text" name="number" placeholder="№" v-model="inputNumber")
+                        div.form-group
+                            input.form-control(type="text" name="date" placeholder="Дата" v-model="inputDate")
+                        div.form-group
+                            input.form-control(type="text" name="time" placeholder="Время" v-model="inputTime")
+                        div.form-group
+                            input.form-control(type="text" name="from" placeholder="Откуда" v-model="inputFrom")
+                        div.form-group
+                            input.form-control(type="text" name="where" placeholder="Куда" v-model="inputWhere")
+                        div.form-group
+                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone")
+                        div.form-group
+                            input.form-control(type="text" name="driver" placeholder="Водитель" v-model="inputDriver")
+                        button#clear.btn.btn-primary Сбросить
+                        div.card.card--orders
+                            div.table-responsive
+                                div#DataTables_Table_0_wrapper.dataTables_wrapper.no-footer
+                                    table.table.table-hover.table-outline.table-vcenter.text-nowrap.card-table
+                                        thead
+                                            th 
+                                            th №
+                                            th Дата
+                                            th Время
+                                            th Откуда
+                                            th Куда
+                                            th Имя
+                                            th Телефон
+                                            th Цена
+                                            th %
+                                            th Тариф
+                                            th Водитель
+                                            th Статус
+                                        tbody
+                                            tr(class="{{item.class}}" v-for="item in array | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'")
+                                                td
+                                                    label.custom-control.custom-checkbox
+                                                        input.custom-control-input(type="checkbox")
+                                                        span.custom-control-label
+                                                td
+                                                    | {{item.number}}
+                                                td
+                                                    | {{item.date}}
+                                                td
+                                                    | {{item.time}}
+                                                td
+                                                    | {{item.from}}
+                                                td
+                                                    | {{item.where}}
+                                                td
+                                                    | {{item.name}}
+                                                td
+                                                    | {{item.phone}}
+                                                td
+                                                    | {{item.price}}
+                                                td
+                                                    | {{item.percent}}
+                                                td
+                                                    | {{item.tariff}}
+                                                td
+                                                    | {{item.driver}}
+                                                td
+                                                    | {{item.status}}
+
+                                    div.dataTables_info#DataTables_Table_0_info(role="status" aria-live="polite") 1 — 10 из 32 записей
+                                    div.dataTables_paginate.paging_simple_numbers#DataTables_Table_0_paginate
+                                        a.paginate_button.previous.disabled(aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous") Предыдущая
+                                        a.paginate_button.current(aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" href="#") 1
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 2
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 3
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 4
+                                        a.paginate_button.next(aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0") Следующая
+                                            
+
+       
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="assets/js/app.min.js")
