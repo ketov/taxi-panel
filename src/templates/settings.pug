@@ -15,61 +15,64 @@ html
     body
         div#black-bg
         include includes/new-client-popup
+
+        #hamburger
+            .hamburger__line.hamburger__line--1
+            .hamburger__line.hamburger__line--2
+            .hamburger__line.hamburger__line--3
+
+        nav
+            div.list-group
+                h3 Заказы
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="new-orders.html")
+                    span.icon.mr-3
+                        i.fe.fe-bell
+                    span.nav-text 
+                        nobr Новые заявки
+                    span.ml-auto.badge.badge-secondary.nav-badge 2
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="index.html")
+                    span.icon.mr-3
+                        i.fe.fe-check-circle
+                    span.nav-text Опубликованные
+                    span.ml-auto.badge.badge-secondary.nav-badge 1
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="process.html")
+                    span.icon.mr-3
+                        i.fe.fe-refresh-cw
+                    span.nav-text 
+                        nobr В работе
+                    span.ml-auto.badge.badge-secondary.nav-badge 12
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="archive.html")
+                    span.icon.mr-3
+                        i.fe.fe-inbox
+                    span.nav-text Архив
+                    span.ml-auto.badge.badge-secondary.nav-badge 434
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="drivers.html")
+                    span.icon.mr-3
+                        i.fe.fe-truck
+                    span.nav-text Водители
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="clients.html")
+                    span.icon.mr-3
+                        i.fe.fe-users
+                    span.nav-text Клиенты
+                a.list-group-item.list-group-item-action.d-flex.align-items-center.active(href="javascript:void(0);")
+                    span.icon.mr-3
+                        i.fe.fe-settings
+                    span.nav-text Настройки
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="javascript:void(0);")
+                    span.icon.mr-3
+                        i.fe.fe-log-out
+                    span.nav-text Выход
+
         div.my-3.my-md-5
             div.container
                 div.row.taxi-row
-                    div.col-md-3
-                        div.list-group
-                            h3 Заказы
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="new-orders.html")
-                                span.icon.mr-3
-                                    i.fe.fe-bell
-                                | Новые
-                                span.ml-auto.badge.badge-secondary 2
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="index.html")
-                                span.icon.mr-3
-                                    i.fe.fe-check-circle
-                                | Опубликованные
-                                span.ml-auto.badge.badge-secondary 1
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="process.html")
-                                span.icon.mr-3
-                                    i.fe.fe-refresh-cw
-                                | В работе
-                                span.ml-auto.badge.badge-secondary 12
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="archive.html")
-                                span.icon.mr-3
-                                    i.fe.fe-inbox
-                                | Архив
-                                span.ml-auto.badge.badge-secondary 434
-
-                        div.list-group.list-group--secondary
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="drivers.html")
-                                span.icon.mr-3
-                                    i.fe.fe-truck
-                                | Водители
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="clients.html")
-                                span.icon.mr-3
-                                    i.fe.fe-users
-                                | Клиенты
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center.active(href="settings.html")
-                                span.icon.mr-3
-                                    i.fe.fe-settings
-                                | Настройки
-
-                        div.list-group.list-group--secondary
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="#")
-                                span.icon.mr-3
-                                    i.fe.fe-log-out
-                                | Выход
-                            
-
-                    div.col-md-9.filters.row#app-settings
+                    div.col-md-12.filters.row#app-settings
                         div.nav-actions
                             ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
                                 li.nav-item
                                     span.nav-link#new-client-button
                                         i.fe.fe-user-plus
-                                        | Новый клиент
+                                        | Новый пользователь
                                 li.nav-item
                                     a.nav-link(href="#")
                                         i.fe.fe-trash-2

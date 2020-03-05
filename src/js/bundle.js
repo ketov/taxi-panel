@@ -24,8 +24,9 @@
 // Библиотеки
 import "script!./libs/parallax.min";
 import "script!./libs/jquery.scrollAnimations.min";
-
+import "script!./libs/jquery-ui.js";
 import "script!./libs/jquery.maskedinput.min";
+//import "script!./libs/jquery.mask.min";
 
 
 // Собственный js

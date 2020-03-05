@@ -6,6 +6,16 @@ div.popup.popup--drivers
 
     h3 Карточка водителя
     div.row
+        div.col-md-12
+            div.driver-stars
+                i.fe.fe-star.active
+                i.fe.fe-star.active
+                i.fe.fe-star.active
+                i.fe.fe-star.active
+                i.fe.fe-star
+                span.stars-median — 4
+
+    div.row
         div.col-md-6
             div.form-group
                 label.form-label(for="phone") Телефон
@@ -36,19 +46,58 @@ div.popup.popup--drivers
                                 th В работе
                                 th Срывов
                                 th Отменённых
+                                th Опоздал
                                 th Отзывы
+                                th Отказы
                         tbody
                             tr
                                 td 560
                                 td 2
                                 td 2
                                 td 0
+                                td 3
                                 td 4
+                                td 0
 
     div.row.text-right
         div.col-md-12
             div.d-flex
                 button.btn.btn-primary.ml-auto(type="submit") Сохранить и закрыть
+
+    div.row.reviews
+        div.col-md-12
+            h3.driver-reviews Отзывы
+            div.review
+                h4 Ирина Баханцева, 01.07.2019
+                p 
+                    | Большое Вам спасибо! Проводы и&nbsp;главное как&nbsp;организована 
+                    | встреча в&nbsp;аэропорту —&nbsp;все точно, четко, комфортно. 
+                    | И&nbsp;цена очень адекватная. Еще не&nbsp;раз воспользуюсь Вашими услугами.
+
+            div.review
+                h4 Дмитрий, 07.06.2019
+                p 
+                    | Добрый день! Хочу выразить благодарность вашему такси 
+                    | за&nbsp;своевременную подачу автомобиля в&nbsp;аэропорт Внуково 
+                    | 05.06.2017! Так же хочу поблагодарить водителя желтого 
+                    | нисана по&nbsp;имени Антон который очень комфортно и&nbsp;быстро 
+                    | доставил нас с&nbsp;женой в&nbsp;Красногорск и&nbsp;помог донести 
+                    | чемоданы до&nbsp;подЪезда! Побольше бы таких водителей!
+
+            div.additional-reviews
+                div.review
+                    h4 Людмила, 25.05.2019
+                    p Хочу поблагодарить водителя Мергена Магомедова за&nbsp;вежливое отношение и&nbsp;высококвалифицированное обслуживание.
+                div.review
+                    h4 TAIROV, 21.05.2019
+                    p 
+                        | Давно пользуюсь услугами этого такси, 
+                        | на&nbsp;самом деле хорошая компания, следят 
+                        | за&nbsp;состояниеми автомобилей. Приезжают 
+                        | на&nbsp;заказ во&nbsp;время в&nbsp;такси Евро стандарт 
+                        | клиент король.
+
+            button.btn.btn-secondary.ml-auto#show-reviews(onclick="var el = $(this).prev('.additional-reviews'); if(el.hasClass('active')){el.removeClass('active'); el.slideUp(400);} else{el.slideDown(300); el.addClass('active')}") Показать все отзывы
 
     div.row
         div.col-md-12

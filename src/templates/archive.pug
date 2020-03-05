@@ -16,56 +16,182 @@ html
         div#black-bg
         include includes/assign-driver
         include includes/add-driver
+        include includes/order-popup
+        include includes/driver-popup
+        include includes/client-popup
+
+        #hamburger
+            .hamburger__line.hamburger__line--1
+            .hamburger__line.hamburger__line--2
+            .hamburger__line.hamburger__line--3
+
+        nav
+            div.list-group
+                h3 Заказы
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="new-orders.html")
+                    span.icon.mr-3
+                        i.fe.fe-bell
+                    span.nav-text 
+                        nobr Новые заявки
+                    span.ml-auto.badge.badge-secondary.nav-badge 2
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="index.html")
+                    span.icon.mr-3
+                        i.fe.fe-check-circle
+                    span.nav-text Опубликованные
+                    span.ml-auto.badge.badge-secondary.nav-badge 1
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="process.html")
+                    span.icon.mr-3
+                        i.fe.fe-refresh-cw
+                    span.nav-text 
+                        nobr В работе
+                    span.ml-auto.badge.badge-secondary.nav-badge 12
+                a.list-group-item.list-group-item-action.d-flex.align-items-center.active(href="javascript:void(0);")
+                    span.icon.mr-3
+                        i.fe.fe-inbox
+                    span.nav-text Архив
+                    span.ml-auto.badge.badge-primary.nav-badge 434
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="drivers.html")
+                    span.icon.mr-3
+                        i.fe.fe-truck
+                    span.nav-text Водители
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="clients.html")
+                    span.icon.mr-3
+                        i.fe.fe-users
+                    span.nav-text Клиенты
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="settings.html")
+                    span.icon.mr-3
+                        i.fe.fe-settings
+                    span.nav-text Настройки
+                a.list-group-item.list-group-item-action.d-flex.align-items-center(href="javascript:void(0);")
+                    span.icon.mr-3
+                        i.fe.fe-log-out
+                    span.nav-text Выход
+
 
         div.my-3.my-md-5
             div.container
                 div.row.taxi-row
-                    div.col-md-3
-                        div.list-group
-                            h3 Заказы
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="new-orders.html")
-                                span.icon.mr-3
-                                    i.fe.fe-bell
-                                | Новые
-                                span.ml-auto.badge.badge-secondary 2
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="index.html")
-                                span.icon.mr-3
-                                    i.fe.fe-check-circle
-                                | Опубликованные
-                                span.ml-auto.badge.badge-secondary 1
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="process.html")
-                                span.icon.mr-3
-                                    i.fe.fe-refresh-cw
-                                | В работе
-                                span.ml-auto.badge.badge-secondary 12
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center.active(href="archive.html")
-                                span.icon.mr-3
-                                    i.fe.fe-inbox
-                                | Архив
-                                span.ml-auto.badge.badge-primary 434
+                    div.col-md-12.filters.row#app-sort-archive
+                        div.nav-actions
+                            ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-plus
+                                        | Новый заказ
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-edit-2
+                                        | Редактировать
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-copy
+                                        | В буфер
+                                li.nav-item
+                                    a.nav-link(href="#")
+                                        i.fe.fe-trash-2
+                                        | Удалить
 
-                        div.list-group.list-group--secondary
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="drivers.html")
-                                span.icon.mr-3
-                                    i.fe.fe-truck
-                                | Водители
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="clients.html")
-                                span.icon.mr-3
-                                    i.fe.fe-users
-                                | Клиенты
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="settings.html")
-                                span.icon.mr-3
-                                    i.fe.fe-settings
-                                | Настройки
+                        div.form-group
+                            input.form-control.datepicker(type="text" name="date-from" placeholder="Дата: с")
+                        div.form-group
+                            input.form-control.datepicker(type="text" name="date-until" placeholder="Дата: по")
+                        button.btn.btn-secondary#show Показать
+                        hr.hr-datapicker                
 
-                        div.list-group.list-group--secondary
-                            a.list-group-item.list-group-item-action.d-flex.align-items-center(href="#")
-                                span.icon.mr-3
-                                    i.fe.fe-log-out
-                                | Выход
-                            
+                        div.form-group
+                            input.form-control(type="text" name="number" placeholder="№" v-model="inputNumber")
+                        //div.form-group
+                            input.form-control(type="text" name="date" placeholder="Дата" v-model="inputDate")
+                        //div.form-group
+                            input.form-control(type="text" name="time" placeholder="Время" v-model="inputTime")
+                        div.form-group
+                            input.form-control(type="text" name="from" placeholder="Откуда" v-model="inputFrom")
+                        div.form-group
+                            input.form-control(type="text" name="where" placeholder="Куда" v-model="inputWhere")
+                        div.form-group
+                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone")
+                        div.form-group
+                            input.form-control(type="text" name="driver" placeholder="Водитель" v-model="inputDriver")
+                        button#clear.btn.btn-primary Сбросить
+                        
+                        div.card.card--orders
+                            div.table-responsive
+                                div#DataTables_Table_0_wrapper.dataTables_wrapper.no-footer
+                                    table.table.table-hover.table-outline.table-vcenter.text-nowrap.card-table
+                                        thead
+                                            th
+                                                label.custom-control.custom-checkbox
+                                                    input.custom-control-input.general-checkbox(type="checkbox" onchange="var table = $(this).closest('.table-responsive'); if($(this).prop('checked')==false){table.find('.input-checkbox').prop('checked', false);} else{table.find('.input-checkbox').prop('checked', true);}")
+                                                    span.custom-control-label
+                                            th(@click="sortRow('number')") №
+                                            th(@click="sortRow('date')") Дата
+                                            //th(@click="sortRow('time')") Время
+                                            th(@click="sortRow('from')") Откуда
+                                            th(@click="sortRow('where')") Куда
+                                            th(@click="sortRow('name')") Имя
+                                            th(@click="sortRow('phone')") Телефон
+                                            th(@click="sortRow('price')") Цена, ₽
+                                            th(@click="sortRow('percent')") %
+                                            th(@click="sortRow('tariff')") Тариф
+                                            th(@click="sortRow('driver')") Водитель
+                                            th(@click="sortRow('status')") Статус
+                                            th(@click="sortRow('source')") Источник
+                                            th(@click="sortRow('payment')") Оплата
+                                        tbody
+                                            tr(class="{{item.class}}" v-for="item in sortedData | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'")
+                                                td
+                                                    label.custom-control.custom-checkbox
+                                                        input.custom-control-input.input-checkbox(type="checkbox")
+                                                        span.custom-control-label
+                                                td
+                                                    span.order(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);") {{item.number}}
+                                                td
+                                                    span(class="{{item.timeclass}}") {{item.date}}
+                                                //td
+                                                    span(class="{{item.timeclass}}") {{item.time}}
+                                                td
+                                                    | {{item.from}}
+                                                td
+                                                    | {{item.where}}
+                                                td
+                                                    | {{item.name}}
+                                                td
+                                                    span.phone.phone--clients(onclick="var top = $(window).scrollTop() + 100; $('.popup--clients').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--clients').stop(true, true).fadeIn(300);}, 350);")
+                                                        | {{item.phone}}
+                                                td
+                                                    | {{item.price}}
+                                                td
+                                                    | {{item.percent}}
+                                                td
+                                                    | {{item.tariff}}
+                                                td
+                                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                                        | {{item.driver}}
+                                                td
+                                                    | {{item.status}}
+                                                td
+                                                    | {{item.source}}
+                                                td
+                                                    | {{item.payment}}
+                                                
+                                    div.dataTables_info#DataTables_Table_0_info(role="status" aria-live="polite")
+                                        div.form-group
+                                            select.form-control.custom-select#rowsperpage
+                                                option(value="/?rowsperpage=10") по 10 записей
+                                                option(value="/?rowsperpage=50") по 50 записей
+                                                option(value="/?rowsperpage=100") по 100 записей
+                                    div.dataTables_paginate.paging_simple_numbers#DataTables_Table_0_paginate
+                                        a.paginate_button.previous.disabled(aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous") Предыдущая
+                                        a.paginate_button.current(aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" href="#") 1
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 2
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 3
+                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 4
+                                        a.paginate_button.next(aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0") Следующая
 
-                    div.col-md-9.filters.row#app-archive
+        //div.my-3.my-md-5
+            div.container
+                div.row.taxi-row
+                    div.col-md-12.filters.row#app-archive
                         div.nav-actions
                             ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
                                 li.nav-item
@@ -125,11 +251,11 @@ html
                                                         input.custom-control-input(type="checkbox")
                                                         span.custom-control-label
                                                 td
-                                                    | {{item.number}}
+                                                    span.order(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);") {{item.number}}
                                                 td
                                                     | {{item.date}}
                                                 td
-                                                    | {{item.time}}
+                                                    span(class="{{item.timeclass}}") {{item.time}}
                                                 td
                                                     | {{item.from}}
                                                 td

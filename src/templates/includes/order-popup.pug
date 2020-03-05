@@ -1,0 +1,201 @@
+div.popup.popup--order
+    div.close-form
+        div.close-form__line.close-form__line--1
+        div.close-form__line.close-form__line--2
+
+    form
+        h3.card-title Заказ A342256
+        div.order-info 23.02.2020 16:45
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="from") Откуда
+                    input#from(type="text" class="form-control" value="Аэропорт Симферополь")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="from-address") Адрес
+                    input#from-address(type="text" class="form-control" value="Мальченко, 16")
+
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="where") Куда
+                    input#where(type="text" class="form-control" value="")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="where-address") Адрес
+                    input#where-address(type="text" class="form-control" value="")
+
+        div.row
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="date") Дата
+                    input#date(type="text" class="form-control")
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="time") Время
+                    input#time(type="text" class="form-control")
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="flight-number") Номер рейса
+                    input#flight-number(type="text" class="form-control")
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="timezone") Часовой пояс
+                    select.form-control.custom-select#timezone
+                        option(value="1") MSK–1
+                        option(value="2") MSK (UTC+3)
+                        option(value="3") MSK+1 (UTC+4)
+
+        div.row
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="adult") Взрослые
+                    select.form-control.custom-select#adult
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="children") Дети
+                    select.form-control.custom-select#children
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="bust") Бустеры
+                    select.form-control.custom-select#bust
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="childseat") Детские кресла
+                    select.form-control.custom-select#childseat
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="cradle") Люлька
+                    select.form-control.custom-select#cradle
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="phone") Телефон
+                    input#phone(type="text" class="form-control")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="phone2") Телефон 2
+                    input#phone2(type="text" class="form-control")
+
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="name") Имя
+                    input#name(type="text" class="form-control")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="email") E-mail
+                    input#email(type="text" class="form-control")
+
+        div.row
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="tariff") Тариф
+                    select.form-control.custom-select#tariff
+                        option(value="1") Стандарт
+                        option(value="2") Комфорт
+                        option(value="3") Универсал
+                        option(value="4") Бизнес
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="price") Цена
+                    input#price(type="text" class="form-control")
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="percent") %
+                    input#percent(type="text" class="form-control")
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="table") Табличка
+                    select.form-control.custom-select#table
+                        option(value="1") Есть
+                        option(value="2") Нет
+
+        div.row
+            div.col-md-4
+                div.form-group
+                    label.form-label(for="promocode") Промокод
+                    div.input-group
+                        input#promocode(type="text" class="form-control")
+                        span.input-group-append
+                            button.btn.btn-secondary#promocode-button(type="button") Применить
+            div.col-md-4
+                div.form-group
+                    label.form-label(for="status") Статус
+                    select.form-control.custom-select#status
+                        option(value="1") Новый
+                        option(value="2") Старый
+            div.col-md-4
+                div.form-group
+                    label.form-label(for="source") Источник
+                    input#source(type="text" class="form-control")
+
+        div.row
+            div.col-md-3
+                div.form-group
+                    label.form-label(for="payment") Форма оплаты
+                    select.form-control.custom-select#payment
+                        option(value="1") Нал.
+                        option(value="2") Безнал.
+            div.col-md-9
+                div.form-group
+                    label.form-label(for="comment") Комментарий
+                    textarea.form-control#comment
+                
+
+        div.row
+            div.col-md-12
+                h3.driver Водитель
+                div.table-responsive
+                    div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
+                        table.table
+                            thead
+                                tr
+                                    th Имя
+                                    th Телефон
+                                    th Модель
+                                    th Марка
+                                    th Гос. номер
+                                    th Вып.
+                                    th В раб.
+                                    th Срывы
+                                    th Отм.
+                                    th Опозд.
+                            tbody
+                                tr
+                                    td Фёдор
+                                    td
+                                        span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                            | +7 (992) 310-54-30
+                                    td Hyundai
+                                    td Solaris
+                                    td Е432КА
+                                    td 272
+                                    td 0
+                                    td 1
+                                    td 1
+                                    td 3
+
+    div.card-footer.text-right
+        button.btn.btn-danger Удалить
+        button.btn.btn-secondary В буфер
+        button.btn.btn-secondary Обратный трансфер
+        button.btn.btn-secondary Назначить водителя
+        button.btn.btn-primary Сохранить и закрыть

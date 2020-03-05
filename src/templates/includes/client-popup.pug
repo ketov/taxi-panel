@@ -15,6 +15,12 @@ div.popup.popup--clients
                 input.form-control#name(type="text" value="")
 
     div.row
+        div.col-md-6
+            div.form-group
+                label.form-label(for="email") E-mail
+                input.form-control#email(type="text" value="")
+
+    div.row
         div.col-md-12
             div.table-responsive
                 div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
@@ -48,7 +54,9 @@ div.popup.popup--clients
                                 th Статус
                         tbody
                             tr
-                                td 342342
+                                td
+                                    span.order.order--client(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);")
+                                        | 342342
                                 td 25.09.2019
                                 td 15:00
                                 td Закрыт
