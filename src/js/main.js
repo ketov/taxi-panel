@@ -12,20 +12,125 @@ $(document).ready(function () {
             return false;
         });
     }
+
+    //Работа с меню
+    function setCookie(name, value) {
+        document.cookie = name + "=" + value;
+    }
+    function getCookie(name) {
+        var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+        if (r)
+            return r[2];
+        else
+            return "";
+    }
+    function deleteCookie(name) {
+        var date = new Date(); // Берём текущую дату
+        date.setTime(date.getTime() - 1); // Возвращаемся в "прошлое"
+        document.cookie = name += "=; expires=" + date.toGMTString(); // Устанавливаем cookie пустое значение и срок действия до прошедшего уже времени
+    }
+    //setCookie("checkbox", true); // Устанавливаем cookie
+    //alert(getCookie("firstname")); // Выводим cookie
+    //deleteCookie("firstname"); // Удаляем cookie
+    //alert(getCookie("firstname")); // Убеждаемся, что ничего не осталось
+    //if(getCookie("checkbox")!=false){
+    //    alert(1);
+    //}
+    //var c = getCookie(checkbox);
+    //alert(c);
     
-    $("#rowsperpage").change(function()
+    var c = getCookie("checkbox");
+    
+    if (c!=false){
+        $('nav').addClass('active');
+        $('#full-menu-checkbox').prop('checked', true)
+    }
+
+    $('#full-menu-checkbox').on('change', function () {
+        if ($(this).prop('checked') != false) {
+            $('nav').addClass('active');
+            setCookie("checkbox", true);
+        } else {
+            $('nav').removeClass('active');
+            deleteCookie("checkbox");
+        }
+    });
+
+    $('#buffer').on('click', function () {
+
+        let datesArray = [];
+
+        $('.input-checkbox').each(function () {
+            var date = $(this).attr('data-date').slice(0, 10);
+
+            if ($(this).prop('checked') == true) {
+                datesArray.push(date);
+            }
+        });
+
+        datesArray = Array.from(new Set(datesArray));
+        let clipboard = {};
+
+        $('.input-checkbox').each(function () {
+            var date = $(this).attr('data-date').slice(0, 10);
+            if ($(this).prop('checked') == true) {
+                for (var i = 0; i < datesArray.length; i++) {
+                    clipboard[date] = [];
+                }
+            }
+        });
+
+        $('.input-checkbox').each(function () {
+            var date = $(this).attr('data-date').slice(0, 10);
+            var time = $(this).attr('data-date').slice(13, 18);
+            var from = $(this).attr('data-from');
+            var where = $(this).attr('data-where');
+            var number = $(this).attr('data-number');
+            var str = time + " " + from + " — " + where + " " + number + "\n";
+
+            if ($(this).prop('checked') == true) {
+                for (var i in clipboard) {
+                    if (date == i) {
+                        clipboard[i].push(str);
+                    }
+                }
+            }
+        });
+
+        var result = '';
+        for (var i in clipboard) {
+            result = result + i + "\n" + clipboard[i] + "\n";
+        }
+
+        result = result.replace(/,/g, '');
+        //alert(typeof result);
+
+        $('#clipboard-hidden').val(result).select();
+        $('#clipboard-hidden').select();
+        document.execCommand("copy");
+    });
+
+    $("#rowsperpage").change(function ()
     {
         document.location.href = $(this).val();
     });
 
     $("#date").mask("99/99/9999", {placeholder: "00/00/0000"});
     $("#time").mask("99:99", {placeholder: "00:00"});
-    $("#phone, #phone2, #new-driver-phone").mask("+7 (999) 999-99-99", {placeholder: "+7 (000) 000-00-00"});
+    //$("#new-driver-phone").mask("+7 (999) 999-99-99", {placeholder: "+7 (000) 000-00-00"});
 
     $('nav').hover(function () {
-        $(this).addClass('active');
+        if ($('#full-menu-checkbox').prop('checked') != false) {
+            return;
+        } else {
+            $(this).addClass('active');
+        }
     }, function () {
-        $(this).removeClass('active');
+        if ($('#full-menu-checkbox').prop('checked') != false) {
+            return;
+        } else {
+            $(this).removeClass('active');
+        }
     });
 
     $('#hamburger').on('click', function () {
@@ -130,7 +235,7 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                if ($(this).hasClass('datepicker')) {
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
                     return;
                 } else {
                     $(this).val('');
@@ -200,7 +305,7 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                if ($(this).hasClass('datepicker')) {
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
                     return;
                 } else {
                     $(this).val('');
@@ -211,10 +316,10 @@ $(document).ready(function () {
             $(this).submit();
         });
     }
-    
-    
-    
-        if ($('#app-sort-assign-drivers').length > 0) {
+
+
+
+    if ($('#app-sort-assign-drivers').length > 0) {
         var appsortassigndrivers = new Vue({
             el: '#app-sort-assign-drivers',
             computed: {
@@ -295,16 +400,16 @@ $(document).ready(function () {
                         desc: true
                     },
                     items: [
-                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2 000 ₽', percent: '500', tariff: 'Стандарт', source: 'ВК', payment: 'Нал.'},
-                        {number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1 700 ₽', percent: '100', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
-                        {class: 'red', number: 'A342321', date: '09.09.2019 — 15:30', time: '15:30', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Судак', name: 'Лидия', phone: '8 (908) 441-19-10', price: '2 500 ₽', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
-                        {number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3 000 ₽', percent: '400', tariff: 'Универсал', source: 'Инстаграм', payment: 'Безнал.'},
-                        {number: 'A341023', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Ялта', where: 'Алушта', name: 'Михаил', phone: '8 (996) 321-48-80', price: '1 000 ₽', percent: '500', tariff: 'Бизнес', source: 'ВК', payment: 'Нал.'},
-                        {number: 'A338027', date: '08.09.2019 — 17:00', time: '17:00', timeclass: '', from: 'Отрадное', where: 'Керчь', name: 'Дмитрий', phone: '8 (908) 441-19-10', price: '2 000 ₽', percent: '400', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
-                        {number: 'A337990', date: '08.09.2019 — 20:00', time: '20:00', timeclass: '', from: 'Аэр. Симферополь', where: 'Малый маяк', name: 'Анна', phone: '8 (908) 441-19-10', price: '2 000 ₽', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
-                        {class: "yellow", number: 'A337602', date: '09.09.2019 — 15:40', time: '15:40', timeclass: '', from: 'Саки', where: 'Сукко', name: 'Павел', phone: '8 (996) 321-48-80', price: '3 900 ₽', percent: '250', tariff: 'Стандарт', source: 'Инстаграм', payment: 'Безнал.'},
-                        {class: "blue", number: 'A325087', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Севастополь', where: 'Симферополь', name: 'Артём', phone: '8 (908) 441-19-10', price: '5 000 ₽', percent: '100', tariff: 'Бизнес', source: 'ВК', payment: 'Нал.'},
-                        {number: 'A319888', date: '08.09.2019 — 12:00', time: '12:00', timeclass: '', from: 'Ялта', where: 'Солнечногорское', name: 'Светлана', phone: '8 (996) 321-48-80', price: '900 ₽', percent: '250', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
+                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', source: 'ВК', payment: 'Нал.'},
+                        {number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1700', percent: '100', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
+                        {class: 'red', number: 'A342321', date: '09.09.2019 — 15:30', time: '15:30', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Судак', name: 'Лидия', phone: '8 (908) 441-19-10', price: '2500', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
+                        {number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3000', percent: '400', tariff: 'Универсал', source: 'Инстаграм', payment: 'Безнал.'},
+                        {number: 'A341023', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Ялта', where: 'Алушта', name: 'Михаил', phone: '8 (996) 321-48-80', price: '1000', percent: '500', tariff: 'Бизнес', source: 'ВК', payment: 'Нал.'},
+                        {number: 'A338027', date: '08.09.2019 — 17:00', time: '17:00', timeclass: '', from: 'Отрадное', where: 'Керчь', name: 'Дмитрий', phone: '8 (908) 441-19-10', price: '2000', percent: '400', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
+                        {number: 'A337990', date: '08.09.2019 — 20:00', time: '20:00', timeclass: '', from: 'Аэр. Симферополь', where: 'Малый маяк', name: 'Анна', phone: '8 (908) 441-19-10', price: '2000', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
+                        {class: "yellow", number: 'A337602', date: '09.09.2019 — 15:40', time: '15:40', timeclass: '', from: 'Саки', where: 'Сукко', name: 'Павел', phone: '8 (996) 321-48-80', price: '3900', percent: '250', tariff: 'Стандарт', source: 'Инстаграм', payment: 'Безнал.'},
+                        {class: "blue", number: 'A325087', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Севастополь', where: 'Симферополь', name: 'Артём', phone: '8 (908) 441-19-10', price: '5000', percent: '100', tariff: 'Бизнес', source: 'ВК', payment: 'Нал.'},
+                        {number: 'A319888', date: '08.09.2019 — 12:00', time: '12:00', timeclass: '', from: 'Ялта', where: 'Солнечногорское', name: 'Светлана', phone: '8 (996) 321-48-80', price: '1900', percent: '250', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
                     ]
                 }
             },
@@ -324,7 +429,7 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                if ($(this).hasClass('datepicker')) {
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
                     return;
                 } else {
                     $(this).val('');
@@ -402,7 +507,7 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                if ($(this).hasClass('datepicker')) {
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
                     return;
                 } else {
                     $(this).val('');
@@ -479,7 +584,7 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                if ($(this).hasClass('datepicker')) {
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
                     return;
                 } else {
                     $(this).val('');
@@ -548,9 +653,13 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                $(this).val('');
-                $(this).focus();
-                $(this).blur();
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
+                    return;
+                } else {
+                    $(this).val('');
+                    $(this).focus();
+                    $(this).blur();
+                }
             });
             $(this).submit();
         });
@@ -868,9 +977,13 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                $(this).val('');
-                $(this).focus();
-                $(this).blur();
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
+                    return;
+                } else {
+                    $(this).val('');
+                    $(this).focus();
+                    $(this).blur();
+                }
             });
             $(this).submit();
         });
@@ -1057,9 +1170,13 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                $(this).val('');
-                $(this).focus();
-                $(this).blur();
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
+                    return;
+                } else {
+                    $(this).val('');
+                    $(this).focus();
+                    $(this).blur();
+                }
             });
             $(this).submit();
         });
@@ -1185,9 +1302,13 @@ $(document).ready(function () {
 
         $('#clear').on('mouseup', function () {
             $('.form-control').each(function () {
-                $(this).val('');
-                $(this).focus();
-                $(this).blur();
+                if ($(this).hasClass('datepicker') || $(this).hasClass('custom-select')) {
+                    return;
+                } else {
+                    $(this).val('');
+                    $(this).focus();
+                    $(this).blur();
+                }
             });
             $(this).submit();
         });
@@ -1232,70 +1353,111 @@ $(document).ready(function () {
      });
      */
 
-    $('#new-client-button').on('click', function () {
-        var top = $(window).scrollTop() + 100;
-        $('.popup--new-client').css({'top': top});
-        $('#black-bg').stop(true, true).fadeIn(300);
-        setTimeout(function () {
-            $('.popup--new-client').stop(true, true).fadeIn(300);
-        }, 350);
-    });
 
     $('.close-form').on('click', function () {
         //var top = $(window).scrollTop() + 100;
-        if ($(this).parents('.popup').hasClass('popup--drivers')) {
-            if (($('.popup--order').css('display') == 'block') || ($('.popup--assign-driver').css('display') == 'block')) {
-                $(this).parent('.popup').stop(true, true).fadeOut(300);
-            } else {
-                $(this).parent('.popup').stop(true, true).fadeOut(300);
-                setTimeout(function () {
-                    $('#black-bg').stop(true, true).fadeOut(300);
-                }, 350);
-            }
-        } 
-        else if ($(this).parents('.popup').hasClass('popup--order')) {
-            if ($('.popup--clients').css('display') == 'block') {
-                $(this).parent('.popup').stop(true, true).fadeOut(300);
-            } else {
-                $(this).parent('.popup').stop(true, true).fadeOut(300);
-                setTimeout(function () {
-                    $('#black-bg').stop(true, true).fadeOut(300);
-                }, 350);
-            }
-        } 
-        else {
-            $(this).parent('.popup').stop(true, true).fadeOut(300);
+        /*if ($(this).parents('.popup').hasClass('popup--drivers')) {
+         if (($('.popup--order').css('display') == 'block') || ($('.popup--assign-driver').css('display') == 'block')) {
+         $(this).parent('.popup').stop(true, true).fadeOut(300);
+         } else {
+         $(this).parent('.popup').stop(true, true).fadeOut(300);
+         setTimeout(function () {
+         $('#black-bg').stop(true, true).fadeOut(300);
+         }, 350);
+         }
+         } else if ($(this).parents('.popup').hasClass('popup--order')) {
+         if ($('.popup--clients').css('display') == 'block') {
+         $(this).parent('.popup').stop(true, true).fadeOut(300);
+         } else {
+         $(this).parent('.popup').stop(true, true).fadeOut(300);
+         setTimeout(function () {
+         $('#black-bg').stop(true, true).fadeOut(300);
+         }, 350);
+         }
+         } else {
+         $(this).parent('.popup').stop(true, true).fadeOut(300);
+         setTimeout(function () {
+         $('#black-bg').stop(true, true).fadeOut(300);
+         }, 350);
+         }*/
+
+
+        if (($('.popup--order').css('display') == 'block') && ($('.popup--drivers').css('display') == 'block')) {
+            $('.popup--primary').stop(true, true).fadeOut(300);
+            $('.popup--primary').removeClass('popup--primary');
+            $('.popup--order').addClass('popup--primary');
+        } else if (($('.popup--assign-driver').css('display') == 'block') && ($('.popup--drivers').css('display') == 'block')) {
+            $('.popup--primary').stop(true, true).fadeOut(300);
+            $('.popup--primary').removeClass('popup--primary');
+            $('.popup--assign-driver').addClass('popup--primary');
+        } else if (($('.popup--assign-driver').css('display') == 'block') && ($('.popup--add-driver').css('display') == 'block')) {
+            $('.popup--primary').stop(true, true).fadeOut(300);
+            $('.popup--primary').removeClass('popup--primary');
+            $('.popup--assign-driver').addClass('popup--primary');
+        } else if (($('.popup--order').css('display') == 'block') && ($('.popup--clients').css('display') == 'block')) {
+            $('.popup--primary').stop(true, true).fadeOut(300);
+            $('.popup--primary').removeClass('popup--primary');
+            $('.popup--clients').addClass('popup--primary');
+        } else {
+            $('.popup--primary').stop(true, true).fadeOut(300);
+            $('.popup--primary').removeClass('popup--primary');
             setTimeout(function () {
                 $('#black-bg').stop(true, true).fadeOut(300);
             }, 350);
         }
-    });
 
-    $('.close-add-driver').on('click', function () {
-        $(this).parent('.popup').stop(true, true).fadeOut(300);
-        setTimeout(function () {
-            $('.popup--assign-driver').stop(true, true).fadeIn(300);
-        }, 350);
     });
 
     /*
-     $('.assign-driver').on('click', function () {
-     var top = $(window).scrollTop() + 100;
-     $('.popup--assign-driver').css({'top': top});
-     $('#black-bg').stop(true, true).fadeIn(300);
+     $('.close-add-driver').on('click', function () {
+     $(this).parent('.popup').stop(true, true).fadeOut(300);
      setTimeout(function () {
      $('.popup--assign-driver').stop(true, true).fadeIn(300);
      }, 350);
-     });
-     */
+     });*/
 
-    $('.add-driver').on('click', function () {
-        var top = $(window).scrollTop() + 100;
-        $('.popup--assign-driver').stop(true, true).fadeOut(300);
-        $('.popup--add-driver').css({'top': top});
-        setTimeout(function () {
-            $('.popup--add-driver').stop(true, true).fadeIn(300);
-        }, 350);
-    });
+    document.onkeydown = function (evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            //$(".close-form").click();
+            if (($('.popup--order').css('display') == 'block') && ($('.popup--drivers').css('display') == 'block')) {
+                $('.popup--primary').stop(true, true).fadeOut(300);
+                $('.popup--primary').removeClass('popup--primary');
+                $('.popup--order').addClass('popup--primary');
+            } else if (($('.popup--assign-driver').css('display') == 'block') && ($('.popup--drivers').css('display') == 'block')) {
+                $('.popup--primary').stop(true, true).fadeOut(300);
+                $('.popup--primary').removeClass('popup--primary');
+                $('.popup--assign-driver').addClass('popup--primary');
+            } else if (($('.popup--assign-driver').css('display') == 'block') && ($('.popup--add-driver').css('display') == 'block')) {
+                $('.popup--primary').stop(true, true).fadeOut(300);
+                $('.popup--primary').removeClass('popup--primary');
+                $('.popup--assign-driver').addClass('popup--primary');
+            } else if (($('.popup--order').css('display') == 'block') && ($('.popup--clients').css('display') == 'block')) {
+                $('.popup--primary').stop(true, true).fadeOut(300);
+                $('.popup--primary').removeClass('popup--primary');
+                $('.popup--clients').addClass('popup--primary');
+            } else {
+                $('.popup--primary').stop(true, true).fadeOut(300);
+                $('.popup--primary').removeClass('popup--primary');
+                setTimeout(function () {
+                    $('#black-bg').stop(true, true).fadeOut(300);
+                }, 350);
+            }
+        }
+    };
+
+    /*
+     $('.add-driver').on('click', function () {
+     var top = $(window).scrollTop() + 100;
+     $('.popup--assign-driver').stop(true, true).fadeOut(300);
+     $('.popup--add-driver').css({'top': top});
+     setTimeout(function () {
+     $('.popup--add-driver').stop(true, true).fadeIn(300);
+     }, 350);
+     });*/
+
+    //function test(){
+    //    alert(1);
+    //};
 
 });

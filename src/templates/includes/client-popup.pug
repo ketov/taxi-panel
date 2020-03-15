@@ -7,18 +7,18 @@ div.popup.popup--clients
     div.row
         div.col-md-6
             div.form-group
-                label.form-label(for="phone") Телефон
-                input.form-control#phone(type="text" value="X (XXX) XXX-XX-XX" disabled)
+                label.form-label(for="phone-clients") Телефон
+                input.form-control#phone-clients(type="text" value="X (XXX) XXX-XX-XX" disabled)
         div.col-md-6
             div.form-group
-                label.form-label(for="name") Имя
-                input.form-control#name(type="text" value="")
+                label.form-label(for="name-clients") Имя
+                input.form-control#name-clients(type="text" value="")
 
     div.row
         div.col-md-6
             div.form-group
-                label.form-label(for="email") E-mail
-                input.form-control#email(type="text" value="")
+                label.form-label(for="email-drivers") E-mail
+                input.form-control#email-drivers(type="text" value="")
 
     div.row
         div.col-md-12
@@ -55,7 +55,7 @@ div.popup.popup--clients
                         tbody
                             tr
                                 td
-                                    span.order.order--client(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);")
+                                    span.order.order--client(onclick="popupOrder();")
                                         | 342342
                                 td 25.09.2019
                                 td 15:00

@@ -20,6 +20,12 @@ html
             .hamburger__line.hamburger__line--2
             .hamburger__line.hamburger__line--3
 
+        div.form-group#full-menu
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="" id="full-menu-checkbox")
+                span.custom-control-label
+                    i(class="fe fe-chevron-right" data-original-title="fe fe-chevron-right")
+
         nav
             div.list-group
                 h3 Заказы
@@ -76,7 +82,7 @@ html
                         div.form-group
                             input.form-control(type="text" name="name" placeholder="Имя" v-model="inputName")
                         div.form-group
-                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone")
+                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00")
                         div.form-group
                             input.form-control(type="text" name="mark" placeholder="Марка" v-model="inputMark")
                         div.form-group
@@ -107,7 +113,7 @@ html
                                                 td
                                                     | {{item.name}}
                                                 td
-                                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                                    span.phone.phone--drivers(onclick="popupDrivers()")
                                                         | {{item.phone}}
                                                 td
                                                     | {{item.mark}}
@@ -136,77 +142,12 @@ html
                                                 option(value="/?rowsperpage=10") по 10 записей
                                                 option(value="/?rowsperpage=50") по 50 записей
                                                 option(value="/?rowsperpage=100") по 100 записей
-
-        //div.my-3.my-md-5
-            div.container
-                div.row.taxi-row
-                    div.col-md-12.filters.row#app-drivers
-                        div.nav-actions
-                            ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
-                                li.nav-item
-                                    a.nav-link(href="#")
-                                        i.fe.fe-user-plus
-                                        | Новый водитель
-
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Имя" v-model="inputName")
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Телефон" v-model="inputPhone")
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Марка" v-model="inputMark")
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Модель" v-model="inputModel")
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Гос. номер" v-model="inputNumber")
-                        button#clear.btn.btn-primary Сбросить
-                        div.card.card--orders
-                            div.table-responsive
-                                div#DataTables_Table_0_wrapper.dataTables_wrapper.no-footer
-                                    table.table.table-hover.table-outline.table-vcenter.text-nowrap.card-table
-                                        thead
-                                            th Имя
-                                            th Телефон
-                                            th Марка
-                                            th Модель
-                                            th Гос. номер
-                                            th Выполненных
-                                            th В работе
-                                            th Срывов
-                                            th Отм.
-                                            th Опозд.
-                                            th Отз.
-                                        tbody
-                                            tr(v-for="item in array | filterBy inputName in 'name' | filterBy inputPhone in 'phone' | filterBy inputMark in 'mark' | filterBy inputModel in 'model' | filterBy inputNumber in 'number'")
-                                                td
-                                                    span
-                                                        | {{item.name}}
-                                                td
-                                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
-                                                        | {{item.phone}}
-                                                td
-                                                    | {{item.mark}}
-                                                td
-                                                    | {{item.model}}
-                                                td
-                                                    | {{item.number}}
-                                                td
-                                                    | {{item.done}}
-                                                td
-                                                    | {{item.inwork}}
-                                                td
-                                                    | {{item.disruptions}}
-                                                td
-                                                    | {{item.cancelled}}
-                                                td
-                                                    | {{item.late}}
-                                                td
-                                                    | {{item.reviews}}
-                                                
-
-                                    div.dataTables_info#DataTables_Table_0_info(role="status" aria-live="polite") 3 из 3 записей
                                             
 
        
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js")
         script(src="assets/js/app.min.js")
+        script
+            include ../js/popups.js

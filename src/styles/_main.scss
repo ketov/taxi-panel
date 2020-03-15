@@ -64,6 +64,18 @@ h2::-moz-selection
     opacity: 1;
 }
 
+#clipboard-hidden{
+    background: none;
+    border: none;
+    height: 1px;
+    left: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+
 h2{
     font-family: $GPM;
     font-size: 270%;
@@ -126,7 +138,24 @@ button{
         padding-right: 0;
     }
     button{
+        margin-bottom: 0;
         width: 100%;
+    }
+}
+
+#full-menu{
+    bottom: 4px;
+    cursor: pointer;
+    left: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    position: fixed;
+    i{
+        cursor: pointer;
+        left: -8px;
+        padding: 8px 8px;
+        position: absolute;
+        top: -6px;
     }
 }
 
@@ -271,7 +300,7 @@ button{
             width: 100%;
         }
     }
-    &--drivers, &--order{
+    &--drivers, &--order, &--add-driver{
         box-shadow: 0px 10px 40px -11px rgba(0,0,0,0.4);
     }
     &--order{
@@ -455,6 +484,9 @@ table{
 }
 
 @media(max-width: 767px){
+    #full-menu{
+        display: none;
+    }
     /*body{
         background: $light-gray;
     }*/

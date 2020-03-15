@@ -21,6 +21,12 @@ html
             .hamburger__line.hamburger__line--2
             .hamburger__line.hamburger__line--3
 
+        div.form-group#full-menu
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="" id="full-menu-checkbox")
+                span.custom-control-label
+                    i(class="fe fe-chevron-right" data-original-title="fe fe-chevron-right")
+
         nav
             div.list-group
                 h3 Заказы
@@ -70,7 +76,7 @@ html
                         div.nav-actions
                             ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
                                 li.nav-item
-                                    span.nav-link#new-client-button
+                                    span.nav-link#new-client-button(onclick="popupNewClient();")
                                         i.fe.fe-user-plus
                                         | Новый пользователь
                                 li.nav-item
@@ -156,7 +162,7 @@ html
                                             label.custom-control.custom-checkbox
                                                 input.custom-control-input(type="checkbox" name="" value="" checked="")
                                                 span.custom-control-label Viber
-                                            input#viber(type="text" class="form-control" value="+7 (911) 111-11-11")
+                                            input#viber(type="text" class="form-control" value="+7 (911) 111-11-11" data-mask="8 (000) 000-00-00")
 
                                 div.row
                                     div.col-md-6.offset-3
@@ -164,7 +170,7 @@ html
                                             label.custom-control.custom-checkbox
                                                 input.custom-control-input(type="checkbox" name="" value="")
                                                 span.custom-control-label WhatsApp
-                                            input#whatsapp(type="text" class="form-control" value="+7 (911) 111-11-11")
+                                            input#whatsapp(type="text" class="form-control" value="+7 (911) 111-11-11" data-mask="8 (000) 000-00-00")
 
                                 div.row
                                     div.col-md-6.offset-3
@@ -185,4 +191,7 @@ html
        
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js")
         script(src="assets/js/app.min.js")
+        script
+            include ../js/popups.js

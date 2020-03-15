@@ -25,6 +25,12 @@ html
             .hamburger__line.hamburger__line--2
             .hamburger__line.hamburger__line--3
 
+        div.form-group#full-menu
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="" id="full-menu-checkbox")
+                span.custom-control-label
+                    i(class="fe fe-chevron-right" data-original-title="fe fe-chevron-right")
+
         nav
             div.list-group
                 h3 Заказы
@@ -125,7 +131,7 @@ html
                                                         input.custom-control-input.input-checkbox(type="checkbox")
                                                         span.custom-control-label
                                                 td
-                                                    span.order(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);") {{item.number}}
+                                                    span.order(onclick="popupOrder();") {{item.number}}
                                                 td
                                                     span(class="{{item.timeclass}}") {{item.date}}
                                                 //td
@@ -137,7 +143,7 @@ html
                                                 td
                                                     | {{item.name}}
                                                 td
-                                                    span.phone.phone--clients(onclick="var top = $(window).scrollTop() + 100; $('.popup--clients').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--clients').stop(true, true).fadeIn(300);}, 350);")
+                                                    span.phone.phone--clients(onclick="popupClients();")
                                                         | {{item.phone}}
                                                 td
                                                     | {{item.price}}
@@ -167,4 +173,7 @@ html
        
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js")
         script(src="assets/js/app.min.js")
+        script
+            include ../js/popups.js

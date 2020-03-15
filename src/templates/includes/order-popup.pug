@@ -6,6 +6,29 @@ div.popup.popup--order
     form
         h3.card-title Заказ A342256
         div.order-info 23.02.2020 16:45
+
+
+
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="phone") Телефон
+                    input#phone(type="text" class="form-control" data-mask="8 (000) 000-00-00")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="phone2") Телефон 2
+                    input#phone2(type="text" class="form-control" data-mask="8 (000) 000-00-00")
+
+        div.row
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="name") Имя
+                    input#name(type="text" class="form-control")
+            div.col-md-6
+                div.form-group
+                    label.form-label(for="email") E-mail
+                    input#email(type="text" class="form-control")
+
         div.row
             div.col-md-6
                 div.form-group
@@ -46,63 +69,6 @@ div.popup.popup--order
                         option(value="1") MSK–1
                         option(value="2") MSK (UTC+3)
                         option(value="3") MSK+1 (UTC+4)
-
-        div.row
-            div.col-md-2
-                div.form-group
-                    label.form-label(for="adult") Взрослые
-                    select.form-control.custom-select#adult
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-            div.col-md-2
-                div.form-group
-                    label.form-label(for="children") Дети
-                    select.form-control.custom-select#children
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-            div.col-md-2
-                div.form-group
-                    label.form-label(for="bust") Бустеры
-                    select.form-control.custom-select#bust
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-            div.col-md-2
-                div.form-group
-                    label.form-label(for="childseat") Детские кресла
-                    select.form-control.custom-select#childseat
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-            div.col-md-2
-                div.form-group
-                    label.form-label(for="cradle") Люлька
-                    select.form-control.custom-select#cradle
-                        option(value="1") 1
-                        option(value="2") 2
-                        option(value="3") 3
-
-        div.row
-            div.col-md-6
-                div.form-group
-                    label.form-label(for="phone") Телефон
-                    input#phone(type="text" class="form-control")
-            div.col-md-6
-                div.form-group
-                    label.form-label(for="phone2") Телефон 2
-                    input#phone2(type="text" class="form-control")
-
-        div.row
-            div.col-md-6
-                div.form-group
-                    label.form-label(for="name") Имя
-                    input#name(type="text" class="form-control")
-            div.col-md-6
-                div.form-group
-                    label.form-label(for="email") E-mail
-                    input#email(type="text" class="form-control")
 
         div.row
             div.col-md-3
@@ -148,6 +114,44 @@ div.popup.popup--order
                     input#source(type="text" class="form-control")
 
         div.row
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="adult") Взрослые
+                    select.form-control.custom-select#adult
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="children") Дети
+                    select.form-control.custom-select#children
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="bust") Бустеры
+                    select.form-control.custom-select#bust
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="childseat") Детские кресла
+                    select.form-control.custom-select#childseat
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+            div.col-md-2
+                div.form-group
+                    label.form-label(for="cradle") Люлька
+                    select.form-control.custom-select#cradle
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+
+
+        div.row
             div.col-md-3
                 div.form-group
                     label.form-label(for="payment") Форма оплаты
@@ -182,7 +186,7 @@ div.popup.popup--order
                                 tr
                                     td Фёдор
                                     td
-                                        span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                        span.phone.phone--drivers(onclick="popupDrivers()")
                                             | +7 (992) 310-54-30
                                     td Hyundai
                                     td Solaris

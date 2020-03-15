@@ -78,6 +78,11 @@
       <div class="hamburger__line hamburger__line--2"></div>
       <div class="hamburger__line hamburger__line--3"></div>
     </div>
+    <div class="form-group" id="full-menu">
+      <label class="custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox" name="" value="" id="full-menu-checkbox"><span class="custom-control-label"><i class="fe fe-chevron-right" data-original-title="fe fe-chevron-right"></i></span>
+      </label>
+    </div>
     <nav>
       <div class="list-group">
         <h3>Заказы</h3><a class="list-group-item list-group-item-action d-flex align-items-center" href="new-orders.html"><span class="icon mr-3"><i class="fe fe-bell"></i></span><span class="nav-text"> 
@@ -91,7 +96,7 @@
           <div class="col-md-12 filters row" id="app-settings">
             <div class="nav-actions">
               <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                <li class="nav-item"><span class="nav-link" id="new-client-button"><i class="fe fe-user-plus"></i>Новый пользователь</span></li>
+                <li class="nav-item"><span class="nav-link" id="new-client-button" onclick="popupNewClient();"><i class="fe fe-user-plus"></i>Новый пользователь</span></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-trash-2"></i>Удалить</a></li>
               </ul>
             </div>
@@ -182,7 +187,7 @@
                       <label class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" name="" value="" checked=""><span class="custom-control-label">Viber</span>
                       </label>
-                      <input class="form-control" id="viber" type="text" value="+7 (911) 111-11-11">
+                      <input class="form-control" id="viber" type="text" value="+7 (911) 111-11-11" data-mask="8 (000) 000-00-00">
                     </div>
                   </div>
                 </div>
@@ -192,7 +197,7 @@
                       <label class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" name="" value=""><span class="custom-control-label">WhatsApp</span>
                       </label>
-                      <input class="form-control" id="whatsapp" type="text" value="+7 (911) 111-11-11">
+                      <input class="form-control" id="whatsapp" type="text" value="+7 (911) 111-11-11" data-mask="8 (000) 000-00-00">
                     </div>
                   </div>
                 </div>
@@ -225,6 +230,88 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script src="assets/js/app.min.js"></script>
+    <script>function popupDrivers() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--drivers').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--drivers').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--drivers').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupOrder() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--order').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--order').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--order').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupClients() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--clients').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--clients').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--clients').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupNewClient() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--new-client').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--new-client').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--new-client').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupAssignDriver() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--assign-driver').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--assign-driver').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--assign-driver').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupAddDriver() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--add-driver').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--add-driver').addClass('popup--primary');
+    
+    var p = $('#assign-drivers-input').val();
+    $('#new-driver-phone').val(p);
+    
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--add-driver').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupQuestion() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--question').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--question').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--question').stop(true, true).fadeIn(300);
+    }, 350);
+}
+    </script>
   </body>
 </html>

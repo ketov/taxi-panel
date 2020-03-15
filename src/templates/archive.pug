@@ -25,6 +25,12 @@ html
             .hamburger__line.hamburger__line--2
             .hamburger__line.hamburger__line--3
 
+        div.form-group#full-menu
+            label.custom-control.custom-checkbox
+                input.custom-control-input(type="checkbox" name="" value="" id="full-menu-checkbox")
+                span.custom-control-label
+                    i(class="fe fe-chevron-right" data-original-title="fe fe-chevron-right")
+
         nav
             div.list-group
                 h3 Заказы
@@ -109,9 +115,9 @@ html
                         div.form-group
                             input.form-control(type="text" name="where" placeholder="Куда" v-model="inputWhere")
                         div.form-group
-                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone")
+                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00")
                         div.form-group
-                            input.form-control(type="text" name="driver" placeholder="Водитель" v-model="inputDriver")
+                            input.form-control(type="text" name="driver" placeholder="Водитель" v-model="inputDriver" data-mask="8 (000) 000-00-00")
                         button#clear.btn.btn-primary Сбросить
                         
                         div.card.card--orders
@@ -144,11 +150,9 @@ html
                                                         input.custom-control-input.input-checkbox(type="checkbox")
                                                         span.custom-control-label
                                                 td
-                                                    span.order(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);") {{item.number}}
+                                                    span.order(onclick="popupOrder();") {{item.number}}
                                                 td
                                                     span(class="{{item.timeclass}}") {{item.date}}
-                                                //td
-                                                    span(class="{{item.timeclass}}") {{item.time}}
                                                 td
                                                     | {{item.from}}
                                                 td
@@ -156,7 +160,7 @@ html
                                                 td
                                                     | {{item.name}}
                                                 td
-                                                    span.phone.phone--clients(onclick="var top = $(window).scrollTop() + 100; $('.popup--clients').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--clients').stop(true, true).fadeIn(300);}, 350);")
+                                                    span.phone.phone--clients(onclick="popupClients();")
                                                         | {{item.phone}}
                                                 td
                                                     | {{item.price}}
@@ -165,7 +169,7 @@ html
                                                 td
                                                     | {{item.tariff}}
                                                 td
-                                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                                    span.phone.phone--drivers(onclick="popupDrivers()")
                                                         | {{item.driver}}
                                                 td
                                                     | {{item.status}}
@@ -188,104 +192,10 @@ html
                                         a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 4
                                         a.paginate_button.next(aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0") Следующая
 
-        //div.my-3.my-md-5
-            div.container
-                div.row.taxi-row
-                    div.col-md-12.filters.row#app-archive
-                        div.nav-actions
-                            ul.nav.nav-tabs.border-0.flex-column.flex-lg-row
-                                li.nav-item
-                                    a.nav-link(href="#")
-                                        i.fe.fe-plus
-                                        | Новый заказ
-                                li.nav-item
-                                    a.nav-link(href="#")
-                                        i.fe.fe-edit-2
-                                        | Редактировать
-                                li.nav-item
-                                    a.nav-link(href="#")
-                                        i.fe.fe-copy
-                                        | В буфер
-                                li.nav-item
-                                    a.nav-link(href="#")
-                                        i.fe.fe-trash-2
-                                        | Удалить
 
-                        div.form-group
-                            input.form-control(type="text" name="number" placeholder="№" v-model="inputNumber")
-                        div.form-group
-                            input.form-control(type="text" name="date" placeholder="Дата" v-model="inputDate")
-                        div.form-group
-                            input.form-control(type="text" name="time" placeholder="Время" v-model="inputTime")
-                        div.form-group
-                            input.form-control(type="text" name="from" placeholder="Откуда" v-model="inputFrom")
-                        div.form-group
-                            input.form-control(type="text" name="where" placeholder="Куда" v-model="inputWhere")
-                        div.form-group
-                            input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone")
-                        div.form-group
-                            input.form-control(type="text" name="driver" placeholder="Водитель" v-model="inputDriver")
-                        button#clear.btn.btn-primary Сбросить
-                        div.card.card--orders
-                            div.table-responsive
-                                div#DataTables_Table_0_wrapper.dataTables_wrapper.no-footer
-                                    table.table.table-hover.table-outline.table-vcenter.text-nowrap.card-table
-                                        thead
-                                            th 
-                                            th №
-                                            th Дата
-                                            th Время
-                                            th Откуда
-                                            th Куда
-                                            th Имя
-                                            th Телефон
-                                            th Цена
-                                            th %
-                                            th Тариф
-                                            th Водитель
-                                            th Статус
-                                        tbody
-                                            tr(class="{{item.class}}" v-for="item in array | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'")
-                                                td
-                                                    label.custom-control.custom-checkbox
-                                                        input.custom-control-input(type="checkbox")
-                                                        span.custom-control-label
-                                                td
-                                                    span.order(onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);") {{item.number}}
-                                                td
-                                                    | {{item.date}}
-                                                td
-                                                    span(class="{{item.timeclass}}") {{item.time}}
-                                                td
-                                                    | {{item.from}}
-                                                td
-                                                    | {{item.where}}
-                                                td
-                                                    | {{item.name}}
-                                                td
-                                                    | {{item.phone}}
-                                                td
-                                                    | {{item.price}}
-                                                td
-                                                    | {{item.percent}}
-                                                td
-                                                    | {{item.tariff}}
-                                                td
-                                                    | {{item.driver}}
-                                                td
-                                                    | {{item.status}}
-
-                                    div.dataTables_info#DataTables_Table_0_info(role="status" aria-live="polite") 1 — 10 из 32 записей
-                                    div.dataTables_paginate.paging_simple_numbers#DataTables_Table_0_paginate
-                                        a.paginate_button.previous.disabled(aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" id="DataTables_Table_0_previous") Предыдущая
-                                        a.paginate_button.current(aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" href="#") 1
-                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 2
-                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 3
-                                        a.paginate_button(aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" href="#") 4
-                                        a.paginate_button.next(aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0") Следующая
-                                            
-
-       
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js")
         script(src="assets/js/app.min.js")
+        script
+            include ../js/popups.js

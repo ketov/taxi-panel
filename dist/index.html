@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/all.min.css">
   </head>
   <body>
+    <textarea id="clipboard-hidden" type="hidden"></textarea>
     <div id="black-bg"></div>
     <div class="popup popup--assign-driver">
       <div class="close-form">
@@ -39,12 +40,12 @@
       <div class="row" id="app-sort-assign-drivers">
         <div class="col-md-6">
           <div class="form-group">
-            <input class="form-control" type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000 00-00">
+            <input class="form-control" id="assign-drivers-input" type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00">
           </div>
         </div>
         <div class="col-md-6">
           <div class="d-flex">
-            <button class="btn btn-outline-primary add-driver" type="submit"><i class="fe fe-plus mr-2"></i>Новый водитель</button>
+            <button class="btn btn-outline-primary add-driver" type="submit" onclick="popupAddDriver();"><i class="fe fe-plus mr-2"></i>Новый водитель</button>
           </div>
         </div>
         <div class="col-md-12">
@@ -69,7 +70,7 @@
                 <tbody>
                   <tr v-for="item in sortedData | filterBy inputName in 'name' | filterBy inputPhone in 'phone' | filterBy inputMark in 'mark' | filterBy inputModel in 'model' | filterBy inputNumber in 'number'">
                     <td>{{item.name}}</td>
-                    <td><span class="phone phone--drivers" onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);">{{item.phone}}</span></td>
+                    <td><span class="phone phone--drivers" onclick="popupDrivers();">{{item.phone}}</span></td>
                     <td>{{item.model}}</td>
                     <td>{{item.mark}}</td>
                     <td>{{item.number}}</td>
@@ -87,41 +88,9 @@
           </div>
         </div>
       </div>
-      <!--div.row
-      div.col-md-12
-          div.table-responsive
-              div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
-                  table.table
-                      thead
-                          tr
-                              th Имя
-                              th Телефон
-                              th Модель
-                              th Марка
-                              th Гос. номер
-                              th Выполненных
-                              th В работе
-                              th Срывы
-                              th Отмененных
-                      tbody
-                          tr
-                              td Фёдор
-                              td
-                                  span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
-                                      | +7 (992) 310-54-30
-                              td Hyundai
-                              td Solaris
-                              td Е432КА
-                              td 272
-                              td 0
-                              td 1
-                              td 1
-                              td 
-                                  button.btn.btn-secondary.ml-auto(type="submit") Назначить
-      -->
     </div>
     <div class="popup popup--add-driver">
-      <div class="close-add-driver">
+      <div class="close-form">
         <div class="close-form__line close-form__line--1"></div>
         <div class="close-form__line close-form__line--2"></div>
       </div>
@@ -130,7 +99,7 @@
         <div class="col-md-12">
           <div class="form-group">
             <label class="form-label" for="new-driver-phone">Телефон</label>
-            <input class="form-control" id="new-driver-phone" type="text" value="">
+            <input class="form-control" id="new-driver-phone" type="text" value="" data-mask="8 (000) 000-00-00">
           </div>
         </div>
         <div class="col-md-12">
@@ -170,6 +139,34 @@
       <form>
         <h3 class="card-title">Заказ A342256</h3>
         <div class="order-info">23.02.2020 16:45</div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="phone">Телефон</label>
+              <input class="form-control" id="phone" type="text" data-mask="8 (000) 000-00-00">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="phone2">Телефон 2</label>
+              <input class="form-control" id="phone2" type="text" data-mask="8 (000) 000-00-00">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="name">Имя</label>
+              <input class="form-control" id="name" type="text">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-label" for="email">E-mail</label>
+              <input class="form-control" id="email" type="text">
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -225,86 +222,6 @@
                 <option value="2">MSK (UTC+3)</option>
                 <option value="3">MSK+1 (UTC+4)</option>
               </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="form-label" for="adult">Взрослые</label>
-              <select class="form-control custom-select" id="adult">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="form-label" for="children">Дети</label>
-              <select class="form-control custom-select" id="children">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="form-label" for="bust">Бустеры</label>
-              <select class="form-control custom-select" id="bust">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="form-label" for="childseat">Детские кресла</label>
-              <select class="form-control custom-select" id="childseat">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label class="form-label" for="cradle">Люлька</label>
-              <select class="form-control custom-select" id="cradle">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="form-label" for="phone">Телефон</label>
-              <input class="form-control" id="phone" type="text">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="form-label" for="phone2">Телефон 2</label>
-              <input class="form-control" id="phone2" type="text">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="form-label" for="name">Имя</label>
-              <input class="form-control" id="name" type="text">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="form-label" for="email">E-mail</label>
-              <input class="form-control" id="email" type="text">
             </div>
           </div>
         </div>
@@ -369,6 +286,58 @@
           </div>
         </div>
         <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-label" for="adult">Взрослые</label>
+              <select class="form-control custom-select" id="adult">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-label" for="children">Дети</label>
+              <select class="form-control custom-select" id="children">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-label" for="bust">Бустеры</label>
+              <select class="form-control custom-select" id="bust">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-label" for="childseat">Детские кресла</label>
+              <select class="form-control custom-select" id="childseat">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="form-label" for="cradle">Люлька</label>
+              <select class="form-control custom-select" id="cradle">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-3">
             <div class="form-group">
               <label class="form-label" for="payment">Форма оплаты</label>
@@ -408,7 +377,7 @@
                   <tbody>
                     <tr>
                       <td>Фёдор</td>
-                      <td><span class="phone phone--drivers" onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);">+7 (992) 310-54-30</span></td>
+                      <td><span class="phone phone--drivers" onclick="popupDrivers()">+7 (992) 310-54-30</span></td>
                       <td>Hyundai</td>
                       <td>Solaris</td>
                       <td>Е432КА</td>
@@ -442,22 +411,22 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-label" for="phone">Телефон</label>
-            <input class="form-control" id="phone" type="text" value="X (XXX) XXX-XX-XX" disabled>
+            <label class="form-label" for="phone-clients">Телефон</label>
+            <input class="form-control" id="phone-clients" type="text" value="X (XXX) XXX-XX-XX" disabled>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-label" for="name">Имя</label>
-            <input class="form-control" id="name" type="text" value="">
+            <label class="form-label" for="name-clients">Имя</label>
+            <input class="form-control" id="name-clients" type="text" value="">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-label" for="email">E-mail</label>
-            <input class="form-control" id="email" type="text" value="">
+            <label class="form-label" for="email-drivers">E-mail</label>
+            <input class="form-control" id="email-drivers" type="text" value="">
           </div>
         </div>
       </div>
@@ -507,7 +476,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="order order--client" onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);">342342</span></td>
+                    <td><span class="order order--client" onclick="popupOrder();">342342</span></td>
                     <td>25.09.2019</td>
                     <td>15:00</td>
                     <td>Закрыт</td>
@@ -548,14 +517,14 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-label" for="phone">Телефон</label>
-            <input class="form-control" id="phone" type="text" value="X (XXX) XXX-XX-XX" disabled>
+            <label class="form-label" for="phone-drivers">Телефон</label>
+            <input class="form-control" id="phone-drivers" type="text" value="X (XXX) XXX-XX-XX" disabled>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-label" for="name">Имя</label>
-            <input class="form-control" id="name" type="text" value="">
+            <label class="form-label" for="name-drivers">Имя</label>
+            <input class="form-control" id="name-drivers" type="text" value="">
           </div>
         </div>
       </div>
@@ -696,6 +665,11 @@
       <div class="hamburger__line hamburger__line--2"></div>
       <div class="hamburger__line hamburger__line--3"></div>
     </div>
+    <div class="form-group" id="full-menu">
+      <label class="custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox" name="" value="" id="full-menu-checkbox"><span class="custom-control-label"><i class="fe fe-chevron-right" data-original-title="fe fe-chevron-right"></i></span>
+      </label>
+    </div>
     <nav>
       <div class="list-group">
         <h3>Заказы</h3><a class="list-group-item list-group-item-action d-flex align-items-center" href="new-orders.html"><span class="icon mr-3"><i class="fe fe-bell"></i></span><span class="nav-text"> 
@@ -711,7 +685,7 @@
               <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-plus"></i>Новый заказ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-edit-2"></i>Редактировать</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-copy"></i>В буфер</a></li>
+                <li class="nav-item"><a class="nav-link" id="buffer"><i class="fe fe-copy"></i>В буфер</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-trash-2"></i>Удалить</a></li>
               </ul>
             </div>
@@ -737,7 +711,7 @@
               <input class="form-control" type="text" name="where" placeholder="Куда" v-model="inputWhere">
             </div>
             <div class="form-group">
-              <input class="form-control" type="text" name="phone" placeholder="Телефон" v-model="inputPhone">
+              <input class="form-control" type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00">
             </div>
             <button class="btn btn-primary" id="clear">Сбросить</button>
             <div class="card card--orders">
@@ -768,12 +742,12 @@
                       <tr class="{{item.class}}" v-for="item in sortedData | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone'">
                         <td>
                           <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input input-checkbox" type="checkbox"><span class="custom-control-label"></span>
+                            <input class="custom-control-input input-checkbox" type="checkbox" data-date="{{item.date}}" data-from="{{item.from}}" data-where="{{item.where}}" data-number="{{item.price-item.percent}}"><span class="custom-control-label"></span>
                           </label>
                         </td>
-                        <td><span class="order" onclick="var top = $(window).scrollTop() + 100; $('.popup--order').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--order').stop(true, true).fadeIn(300);}, 350);">{{item.number}}</span></td>
+                        <td><span class="order" onclick="popupOrder();">{{item.number}}</span></td>
                         <td>
-                          <button class="btn btn-secondary assign-driver" onclick="var top = $(window).scrollTop() + 100; $('.popup--assign-driver').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--assign-driver').stop(true, true).fadeIn(300);}, 350);">Назначить</button>
+                          <button class="btn btn-secondary assign-driver" onclick="popupAssignDriver();">Назначить</button>
                         </td>
                         <td><span class="{{item.timeclass}}">{{item.date}}</span></td>
                         <!--tdspan(class="{{item.timeclass}}") {{item.time}}
@@ -781,7 +755,7 @@
                         <td>{{item.from}}</td>
                         <td>{{item.where}}</td>
                         <td>{{item.name}}</td>
-                        <td><span class="phone phone--clients" onclick="var top = $(window).scrollTop() + 100; $('.popup--clients').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--clients').stop(true, true).fadeIn(300);}, 350);">{{item.phone}}</span></td>
+                        <td><span class="phone phone--clients" onclick="popupClients();">{{item.phone}}</span></td>
                         <td>{{item.price}}</td>
                         <td>{{item.percent}}</td>
                         <td>{{item.tariff}}</td>
@@ -803,14 +777,95 @@
                 </div>
               </div>
             </div>
+            <button class="btn btn-primary" onclick="popupQuestion();">Модалка с вариантами ответов</button>
           </div>
         </div>
-        <button class="btn btn-primary" onclick="var top = $(window).scrollTop() + 100; $('.popup--question').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () { $('.popup--question').stop(true, true).fadeIn(300); }, 350);">Модалка с вариантами ответов</button>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script src="assets/js/app.min.js"></script>
+    <script>function popupDrivers() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--drivers').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--drivers').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--drivers').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupOrder() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--order').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--order').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--order').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupClients() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--clients').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--clients').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--clients').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupNewClient() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--new-client').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--new-client').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--new-client').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupAssignDriver() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--assign-driver').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--assign-driver').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--assign-driver').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupAddDriver() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--add-driver').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--add-driver').addClass('popup--primary');
+    
+    var p = $('#assign-drivers-input').val();
+    $('#new-driver-phone').val(p);
+    
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--add-driver').stop(true, true).fadeIn(300);
+    }, 350);
+}
+
+function popupQuestion() {
+    var top = $(window).scrollTop() + 100;
+    $('.popup--question').css({'top': top});
+    $('.popup--primary').removeClass('popup--primary');
+    $('.popup--question').addClass('popup--primary');
+    $('#black-bg').stop(true, true).fadeIn(300);
+    setTimeout(function () {
+        $('.popup--question').stop(true, true).fadeIn(300);
+    }, 350);
+}
+    </script>
   </body>
 </html>

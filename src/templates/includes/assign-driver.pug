@@ -22,10 +22,10 @@ div.popup.popup--assign-driver
     div.row#app-sort-assign-drivers
         div.col-md-6
             div.form-group
-                input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000 00-00")
+                input.form-control#assign-drivers-input(type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00")
         div.col-md-6
             div.d-flex
-                button.btn.btn-outline-primary.add-driver(type="submit")
+                button.btn.btn-outline-primary.add-driver(type="submit" onclick="popupAddDriver();")
                     i.fe.fe-plus.mr-2
                     | Новый водитель
         div.col-md-12
@@ -51,7 +51,7 @@ div.popup.popup--assign-driver
                                 td
                                     | {{item.name}}
                                 td
-                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
+                                    span.phone.phone--drivers(onclick="popupDrivers();")
                                         | {{item.phone}}
                                 td
                                     | {{item.model}}
@@ -67,39 +67,5 @@ div.popup.popup--assign-driver
                                     | {{item.disruptions}}
                                 td
                                     | {{item.cancelled}}
-                                td 
-                                    button.btn.btn-secondary.ml-auto(type="submit") Назначить
-
-
-
-    //div.row
-        div.col-md-12
-            div.table-responsive
-                div.dataTables_wrapper.no-footer#DataTables_Table_0_wrapper
-                    table.table
-                        thead
-                            tr
-                                th Имя
-                                th Телефон
-                                th Модель
-                                th Марка
-                                th Гос. номер
-                                th Выполненных
-                                th В работе
-                                th Срывы
-                                th Отмененных
-                        tbody
-                            tr
-                                td Фёдор
-                                td
-                                    span.phone.phone--drivers(onclick="var top = $(window).scrollTop() + 100; $('.popup--drivers').css({'top': top}); $('#black-bg').stop(true, true).fadeIn(300); setTimeout(function () {$('.popup--drivers').stop(true, true).fadeIn(300);}, 350);")
-                                        | +7 (992) 310-54-30
-                                td Hyundai
-                                td Solaris
-                                td Е432КА
-                                td 272
-                                td 0
-                                td 1
-                                td 1
                                 td 
                                     button.btn.btn-secondary.ml-auto(type="submit") Назначить
