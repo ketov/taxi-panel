@@ -84,9 +84,22 @@ html
                         div.form-group
                             input.form-control(type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00")
                         div.form-group
-                            input.form-control(type="text" name="mark" placeholder="Марка" v-model="inputMark")
+                            input.form-control.with-hidden(type="text" name="mark" placeholder="Марка" v-model="inputMark")
+                            ul.suggestion-menu#suggestion-menu-mark
+                                li.active Audi
+                                li BMW
+                                li Chevrolet
+                                li Ford
+                                li Kia
+                                li Nissan
+                                li Renault
+                                li Toyota
                         div.form-group
-                            input.form-control(type="text" name="model" placeholder="Модель" v-model="inputModel")
+                            input.form-control.with-hidden(type="text" name="model" placeholder="Модель" v-model="inputModel" disabled)
+                            ul.suggestion-menu#suggestion-menu-model
+                                li.active Aveo
+                                li Rio
+                                li Picanto
                         div.form-group
                             input.form-control(type="text" name="number" placeholder="Гос. номер" v-model="inputNumber")
                         button#clear.btn.btn-primary Сбросить

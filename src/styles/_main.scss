@@ -115,6 +115,39 @@ button{
     letter-spacing: 1.5px;
 }
 
+.suggestion-menu{
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: rgba(210,214,217,.5) 0 0 28px 0;
+    color: #18191e;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 38px;
+    width: 160px;
+    z-index: 1;
+    padding: 7px 0;
+    list-style: none;
+    li{
+        background: rgba(255, 255, 255, 0);
+        cursor: pointer;
+        padding: 5px 0 5px 14px;
+        transition: 0.2s;
+        &:hover{
+            background: rgba(0,0,0,.04);
+        }
+    }
+    li.active{
+        background: rgba(0,0,0,.04);
+    }
+}
+
+#app-sort-drivers{
+    .form-group{
+        position: relative;
+    }
+}
+
 .driver-stars{
     margin-bottom: 10px;
     margin-top: -20px;

@@ -13,6 +13,7 @@ html
         link(rel="stylesheet" type="text/css" href="assets/css/all.min.css")
 
     body
+        textarea#clipboard-hidden(type="hidden")
         div#black-bg
         include includes/assign-driver
         include includes/add-driver
@@ -92,7 +93,7 @@ html
                                         i.fe.fe-x
                                         | Закрыть
                                 li.nav-item
-                                    a.nav-link(href="#")
+                                    a.nav-link#buffer
                                         i.fe.fe-copy
                                         | В буфер
                                 li.nav-item
@@ -149,7 +150,7 @@ html
                                             tr(class="{{item.class}}" v-for="item in sortedData | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'")
                                                 td
                                                     label.custom-control.custom-checkbox
-                                                        input.custom-control-input.input-checkbox(type="checkbox")
+                                                        input.custom-control-input.input-checkbox(type="checkbox" data-date="{{item.date}}" data-from="{{item.from}}" data-where="{{item.where}}" data-number="{{item.price-item.percent}}" data-bust="{{item.bust}}" data-childseat="{{item.childseat}}" data-cradle="{{item.cradle}}")
                                                         span.custom-control-label
                                                 td
                                                     span.order(onclick="popupOrder();") {{item.number}}

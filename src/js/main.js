@@ -38,10 +38,10 @@ $(document).ready(function () {
     //}
     //var c = getCookie(checkbox);
     //alert(c);
-    
+
     var c = getCookie("checkbox");
-    
-    if (c!=false){
+
+    if (c != false) {
         $('nav').addClass('active');
         $('#full-menu-checkbox').prop('checked', true)
     }
@@ -61,7 +61,7 @@ $(document).ready(function () {
         let datesArray = [];
 
         $('.input-checkbox').each(function () {
-            var date = $(this).attr('data-date').slice(0, 10);
+            var date = $(this).attr('data-date').slice(0, 5);
 
             if ($(this).prop('checked') == true) {
                 datesArray.push(date);
@@ -72,7 +72,7 @@ $(document).ready(function () {
         let clipboard = {};
 
         $('.input-checkbox').each(function () {
-            var date = $(this).attr('data-date').slice(0, 10);
+            var date = $(this).attr('data-date').slice(0, 5);
             if ($(this).prop('checked') == true) {
                 for (var i = 0; i < datesArray.length; i++) {
                     clipboard[date] = [];
@@ -81,12 +81,40 @@ $(document).ready(function () {
         });
 
         $('.input-checkbox').each(function () {
-            var date = $(this).attr('data-date').slice(0, 10);
+            var date = $(this).attr('data-date').slice(0, 5);
             var time = $(this).attr('data-date').slice(13, 18);
             var from = $(this).attr('data-from');
             var where = $(this).attr('data-where');
             var number = $(this).attr('data-number');
-            var str = time + " " + from + " — " + where + " " + number + "\n";
+            var bust = $(this).attr('data-bust');
+            var childseat = $(this).attr('data-childseat');
+            var cradle = $(this).attr('data-cradle');
+            
+            //Бустеры
+            if(bust===undefined){
+                bust = '';
+            }
+            else{
+                bust = "Бустеры: " + bust;
+            }
+            
+            //Детские кресла
+            if(childseat===undefined){
+                childseat = '';
+            }
+            else{
+                childseat = "Детские кресла: " + childseat;
+            }
+            
+            //Люльки
+            if(cradle===undefined){
+                cradle = '';
+            }
+            else{
+                cradle = "Люльки: " + cradle;
+            }
+            
+            var str = time + " " + from + " — " + where + " " + number + " " + bust + " " + childseat + " " + cradle + "\n";
 
             if ($(this).prop('checked') == true) {
                 for (var i in clipboard) {
@@ -181,6 +209,106 @@ $(document).ready(function () {
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $(".datepicker").datepicker();
     });
+
+
+
+
+
+    $('.with-hidden').on('focusout', function () {
+        var el = $(this);
+        var m = el.siblings('.suggestion-menu');
+        m.fadeOut(250);
+    });
+
+    $('.with-hidden').on('input', function () {
+        var el = $(this);
+        //var ul = el.siblings('ul');
+        var l = el.val().length;
+        if (l >= 0) {
+            el.siblings('.suggestion-menu').fadeIn(250);
+        } else {
+            el.siblings('.suggestion-menu').fadeOut(250);
+        }
+
+        document.onkeyup = function (evt) {
+            evt = evt || window.event;
+
+            var m = el.siblings('.suggestion-menu');
+            var a = m.children('.active');
+            var num = m.children('li').length; //Сколько всего элементов в наборе
+            var activeNumber = a.index() + 1; //Порядковый номер текущего элемента
+            var input = m.siblings('.with-hidden');
+
+            if (m.attr('id') == 'suggestion-menu-mark') {
+                //alert(input.val().trim());
+                if (input.val().trim() == '') {
+                    $('#suggestion-menu-model').siblings('.with-hidden').val('');
+                    $('#suggestion-menu-model').siblings('.with-hidden').attr('disabled', true);
+                } else {
+                    $('#suggestion-menu-model').siblings('.with-hidden').attr('disabled', false);
+                }
+            }
+
+            if (evt.keyCode == 40) {
+                a.removeClass('active');
+                if (num == activeNumber) {
+                    m.children('li').eq(0).addClass('active');
+                } else {
+                    m.children('li').eq(activeNumber).addClass('active');
+                }
+            }
+
+            if (evt.keyCode == 38) {
+                a.removeClass('active');
+                if (activeNumber == 0) {
+                    m.children('li').eq(num).addClass('active');
+                } else {
+                    //alert(2);
+                    m.children('li').eq(activeNumber - 2).addClass('active');
+                }
+            }
+
+            if (evt.keyCode == 13) {
+                m.fadeOut(250);
+                input.val(a.text());
+                input.focus();
+                input.blur();
+            }
+
+        };
+    });
+
+    $('.suggestion-menu li').on('click', function () {
+        var el = $(this);
+
+        var input = el.parent('.suggestion-menu').siblings('.with-hidden');
+        var m = el.parent('.suggestion-menu');
+
+        input.val(el.text());
+        el.siblings('.active').removeClass('active');
+        el.addClass('active');
+
+        if (m.attr('id') == 'suggestion-menu-mark') {
+            $('#suggestion-menu-model').siblings('.with-hidden').attr('disabled', false);
+        }
+
+        m.fadeOut(250);
+        input.focus();
+        input.blur();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -400,10 +528,10 @@ $(document).ready(function () {
                         desc: true
                     },
                     items: [
-                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', source: 'ВК', payment: 'Нал.'},
+                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', source: 'ВК', payment: 'Нал.', bust: 0, childseat: 1, cradle: 2},
                         {number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1700', percent: '100', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
                         {class: 'red', number: 'A342321', date: '09.09.2019 — 15:30', time: '15:30', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Судак', name: 'Лидия', phone: '8 (908) 441-19-10', price: '2500', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
-                        {number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3000', percent: '400', tariff: 'Универсал', source: 'Инстаграм', payment: 'Безнал.'},
+                        {number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3000', percent: '400', tariff: 'Универсал', source: 'Инстаграм', payment: 'Безнал.', bust: 2, childseat: 2, cradle: 2},
                         {number: 'A341023', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Ялта', where: 'Алушта', name: 'Михаил', phone: '8 (996) 321-48-80', price: '1000', percent: '500', tariff: 'Бизнес', source: 'ВК', payment: 'Нал.'},
                         {number: 'A338027', date: '08.09.2019 — 17:00', time: '17:00', timeclass: '', from: 'Отрадное', where: 'Керчь', name: 'Дмитрий', phone: '8 (908) 441-19-10', price: '2000', percent: '400', tariff: 'Комфорт', source: 'Одноклассники', payment: 'Безнал.'},
                         {number: 'A337990', date: '08.09.2019 — 20:00', time: '20:00', timeclass: '', from: 'Аэр. Симферополь', where: 'Малый маяк', name: 'Анна', phone: '8 (908) 441-19-10', price: '2000', percent: '250', tariff: 'Универсал', source: 'Телефон', payment: 'Нал.'},
@@ -486,7 +614,7 @@ $(document).ready(function () {
                         {number: 'A338027', date: '08.09.2019 — 17:00', time: '17:00', timeclass: '', from: 'Отрадное', where: 'Керчь', name: 'Дмитрий', phone: '8 (908) 441-19-10', price: '2000', percent: '400', tariff: 'Комфорт', driver: '8 (909) 124-19-48', source: 'Одноклассники', payment: 'Безнал.'},
                         {number: 'A337990', date: '08.09.2019 — 20:00', time: '20:00', timeclass: '', from: 'Аэр. Симферополь', where: 'Малый маяк', name: 'Анна', phone: '8 (908) 441-19-10', price: '2000', percent: '250', tariff: 'Универсал', driver: '8 (967) 273-61-89', source: 'Телефон', payment: 'Нал.'},
                         {number: 'A337602', date: '09.09.2019 — 15:00', time: '15:40', timeclass: '', from: 'Саки', where: 'Сукко', name: 'Павел', phone: '8 (996) 321-48-80', price: '3900', percent: '250', tariff: 'Стандарт', driver: '8 (922) 536-38-17', source: 'Инстаграм', payment: 'Безнал.'},
-                        {number: 'A325087', date: '09.09.2019 — 16:30', time: '16:30', timeclass: 'timeerror', from: 'Севастополь', where: 'Симферополь', name: 'Артём', phone: '8 (908) 441-19-10', price: '5000', percent: '100', tariff: 'Бизнес', driver: '8 (964) 879-88-50', source: 'ВК', payment: 'Нал.'},
+                        {number: 'A325087', date: '09.09.2019 — 16:30', time: '16:30', timeclass: 'timeerror', from: 'Севастополь', where: 'Симферополь', name: 'Артём', phone: '8 (908) 441-19-10', price: '5000', percent: '100', tariff: 'Бизнес', driver: '8 (964) 879-88-50', source: 'ВК', payment: 'Нал.', bust: 0, childseat: 1, cradle: 2},
                         {number: 'A319888', date: '08.09.2019 — 12:00', time: '12:00', timeclass: '', from: 'Ялта', where: 'Солнечногорское', name: 'Светлана', phone: '8 (996) 321-48-80', price: '1900', percent: '250', tariff: 'Комфорт', driver: '8 (909) 712-25-00', source: 'Одноклассники', payment: 'Безнал.'},
                     ]
                 }
@@ -555,7 +683,7 @@ $(document).ready(function () {
                         desc: true
                     },
                     items: [
-                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', driver: '8 (912) 499-50-11', status: 'Закрыт', source: 'ВК', payment: 'Нал.'},
+                        {class: 'green', number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: '', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', driver: '8 (912) 499-50-11', status: 'Закрыт', source: 'ВК', payment: 'Нал.', bust: 0, childseat: 1, cradle: 2},
                         {class: 'red', number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: '', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1700', percent: '100', tariff: 'Комфорт', driver: '8 (909) 113-75-92', status: 'Отменён', source: 'Одноклассники', payment: 'Безнал.'},
                         {class: 'green', number: 'A342321', date: '09.09.2019 — 15:30', time: '15:30', timeclass: 'timeerror', from: 'Аэр. Симферополь', where: 'Судак', name: 'Лидия', phone: '8 (908) 441-19-10', price: '2500', percent: '250', tariff: 'Универсал', driver: '8 (912) 067-44-46', status: 'Закрыт', source: 'Телефон', payment: 'Нал.'},
                         {class: 'red', number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3000', percent: '400', tariff: 'Универсал', driver: '8 (917) 341-26-50', status: 'Сорван', source: 'Инстаграм', payment: 'Безнал.'},
@@ -633,7 +761,7 @@ $(document).ready(function () {
                     },
                     items: [
                         {number: 'A342344', date: '12.09.2019 — 11:00', time: '11:00', timeclass: 'timeerror', from: 'Коктебель', where: 'Бухта Ласпи', name: 'Алёна', phone: '8 (908) 441-19-10', price: '2000', percent: '500', tariff: 'Стандарт', status: 'Новый', source: 'Вк', payment: 'Нал.'},
-                        {number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: '', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1700', percent: '100', tariff: 'Комфорт', status: 'Новый', source: 'Одноклассники', payment: 'Безнал.'},
+                        {number: 'A342256', date: '11.09.2019 — 09:15', time: '09:15', timeclass: '', from: 'Аэр. Симферополь', where: 'Саки', name: 'Георгий', phone: '8 (922) 040-31-91', price: '1700', percent: '100', tariff: 'Комфорт', status: 'Новый', source: 'Одноклассники', payment: 'Безнал.', bust: 0, childseat: 1, cradle: 2},
                         {number: 'A342321', date: '09.09.2019 — 15:30', time: '15:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Судак', name: 'Лидия', phone: '8 (908) 441-19-10', price: '2500', percent: '250', tariff: 'Универсал', status: 'Новый', source: 'Телефон', payment: 'Нал.'},
                         {number: 'A341050', date: '09.09.2019 — 16:30', time: '16:30', timeclass: '', from: 'Аэр. Симферополь', where: 'Евпатория', name: 'Евгения', phone: '8 (922) 040-31-91', price: '3000', percent: '400', tariff: 'Универсал', status: 'Новый', source: 'Инстаграм', payment: 'Безнал.'}
                     ]

@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/all.min.css">
   </head>
   <body>
+    <textarea id="clipboard-hidden" type="hidden"></textarea>
     <div id="black-bg"></div>
     <div class="popup popup--assign-driver">
       <div class="close-form">
@@ -662,7 +663,7 @@
               <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-plus"></i>Новый заказ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-edit-2"></i>Редактировать</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-copy"></i>В буфер</a></li>
+                <li class="nav-item"><a class="nav-link" id="buffer"><i class="fe fe-copy"></i>В буфер</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fe fe-trash-2"></i>Удалить</a></li>
               </ul>
             </div>
@@ -723,7 +724,7 @@
                       <tr class="{{item.class}}" v-for="item in sortedData | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone' | filterBy inputDriver in 'driver'">
                         <td>
                           <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input input-checkbox" type="checkbox"><span class="custom-control-label"></span>
+                            <input class="custom-control-input input-checkbox" type="checkbox" data-date="{{item.date}}" data-from="{{item.from}}" data-where="{{item.where}}" data-number="{{item.price-item.percent}}" data-bust="{{item.bust}}" data-childseat="{{item.childseat}}" data-cradle="{{item.cradle}}"><span class="custom-control-label"></span>
                           </label>
                         </td>
                         <td><span class="order" onclick="popupOrder();">{{item.number}}</span></td>

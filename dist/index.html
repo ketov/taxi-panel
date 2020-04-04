@@ -742,7 +742,7 @@
                       <tr class="{{item.class}}" v-for="item in sortedData | filterBy inputNumber in 'number' | filterBy inputDate in 'date' | filterBy inputTime in 'time' | filterBy inputFrom in 'from' | filterBy inputWhere in 'where' | filterBy inputPhone in 'phone'">
                         <td>
                           <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input input-checkbox" type="checkbox" data-date="{{item.date}}" data-from="{{item.from}}" data-where="{{item.where}}" data-number="{{item.price-item.percent}}"><span class="custom-control-label"></span>
+                            <input class="custom-control-input input-checkbox" type="checkbox" data-date="{{item.date}}" data-from="{{item.from}}" data-where="{{item.where}}" data-number="{{item.price-item.percent}}" data-bust="{{item.bust}}" data-childseat="{{item.childseat}}" data-cradle="{{item.cradle}}"><span class="custom-control-label"></span>
                           </label>
                         </td>
                         <td><span class="order" onclick="popupOrder();">{{item.number}}</span></td>
