@@ -182,20 +182,20 @@
               <input class="form-control" type="text" name="phone" placeholder="Телефон" v-model="inputPhone" data-mask="8 (000) 000-00-00">
             </div>
             <div class="form-group">
-              <input class="form-control with-hidden" type="text" name="mark" placeholder="Марка" v-model="inputMark">
-              <ul class="suggestion-menu" id="suggestion-menu-mark">
-                <li class="active">Audi</li>
-                <li>BMW</li>
-                <li>Chevrolet</li>
-                <li>Ford</li>
-                <li>Kia</li>
-                <li>Nissan</li>
-                <li>Renault</li>
-                <li>Toyota</li>
-              </ul>
+              <input class="form-control with-hidden" id="mark-input" type="text" name="mark" placeholder="Марка" v-model="inputMark">
+              <!--ul.suggestion-menu#suggestion-menu-mark
+              li.active Audi
+              li BMW
+              li Chevrolet
+              li Ford
+              li Kia
+              li Nissan
+              li Renault
+              li Toyota
+              -->
             </div>
             <div class="form-group">
-              <input class="form-control with-hidden" type="text" name="model" placeholder="Модель" v-model="inputModel" disabled>
+              <input class="form-control with-hidden" id="model-input" type="text" name="model" placeholder="Модель" v-model="inputModel">
               <ul class="suggestion-menu" id="suggestion-menu-model">
                 <li class="active">Aveo</li>
                 <li>Rio</li>

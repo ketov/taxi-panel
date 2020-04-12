@@ -13,6 +13,59 @@ $(document).ready(function () {
         });
     }
 
+    if ($('#mark-input').length > 0) {
+        $(function () {
+            var availableTags = [
+                "Audi",
+                "BMW",
+                "Chevrolet",
+                "Citroen",
+                "Daewoo",
+                "Ford",
+                "Honda",
+                "Hyundai",
+                "Infiniti",
+                "KIA",
+                "Land Rover",
+                "Lexus",
+                "LIFAN",
+                "Mazda",
+                "Mercedes-Benz",
+                "Mitsubishi",
+                "Nissan",
+                "Opel",
+                "Peugeot",
+                "Renault",
+                "Skoda",
+                "Subaru",
+                "Suzuki",
+                "Toyota",
+                "Volkswagen",
+                "ВАЗ",
+                "ГАЗ",
+                "УАЗ"
+            ];
+            $("#mark-input").autocomplete({
+                source: availableTags
+            });
+        });
+    }
+    
+    if ($('#model-input').length > 0) {
+        $(function () {
+            var availableTags = [
+                "1",
+                "2",
+                "3"
+            ];
+            $("#model-input").autocomplete({
+                source: availableTags
+            });
+        });
+    }
+
+
+
     //Работа с меню
     function setCookie(name, value) {
         document.cookie = name + "=" + value;
@@ -89,31 +142,28 @@ $(document).ready(function () {
             var bust = $(this).attr('data-bust');
             var childseat = $(this).attr('data-childseat');
             var cradle = $(this).attr('data-cradle');
-            
+
             //Бустеры
-            if(bust===undefined){
+            if (bust === undefined) {
                 bust = '';
-            }
-            else{
+            } else {
                 bust = "Бустеры: " + bust;
             }
-            
+
             //Детские кресла
-            if(childseat===undefined){
+            if (childseat === undefined) {
                 childseat = '';
-            }
-            else{
+            } else {
                 childseat = "Детские кресла: " + childseat;
             }
-            
+
             //Люльки
-            if(cradle===undefined){
+            if (cradle === undefined) {
                 cradle = '';
-            }
-            else{
+            } else {
                 cradle = "Люльки: " + cradle;
             }
-            
+
             var str = time + " " + from + " — " + where + " " + number + " " + bust + " " + childseat + " " + cradle + "\n";
 
             if ($(this).prop('checked') == true) {
@@ -214,6 +264,9 @@ $(document).ready(function () {
 
 
 
+
+
+        /*
     $('.with-hidden').on('focusout', function () {
         var el = $(this);
         var m = el.siblings('.suggestion-menu');
@@ -296,7 +349,7 @@ $(document).ready(function () {
         input.focus();
         input.blur();
     });
-
+*/
 
 
 
